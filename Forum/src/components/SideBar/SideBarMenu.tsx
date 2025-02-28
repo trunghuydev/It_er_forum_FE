@@ -1,6 +1,11 @@
-import React from "react";
-import { Menu } from "antd";
+import React, { useState } from "react";
+import { Layout, Menu } from "antd";
+import { useNavigate } from "react-router-dom";
+import SidebarItem from "./SidebarItem";
+import styles from "./SidebarMenu.module.css";
 import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
   UserOutlined,
   FileTextOutlined,
   WarningOutlined,
@@ -8,23 +13,30 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 
-const menuItems = [
-  { key: "admin", icon: <UserOutlined />, label: "Current Admin" },
-  { key: "post", icon: <FileTextOutlined />, label: "Post" },
-  { key: "report", icon: <WarningOutlined />, label: "Report" },
-  { key: "user", icon: <TeamOutlined />, label: "User" },
-  { key: "logout", icon: <LogoutOutlined />, label: "Logout" },
-];
+const { Sider } = Layout;
 
 const SidebarMenu: React.FC = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
+
   return (
-    <Menu theme="dark" mode="inline">
-      {menuItems.map((item) => (
-        <Menu.Item key={item.key} icon={item.icon}>
-          {item.label}
+    <Sider className={styles.sidebar} collapsed={collapsed}>
+      <Menu theme="dark" mode="inline" className={styles.menu}>
+        <Menu.Item
+          className={styles.toggleButton}
+          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          onClick={() => setCollapsed(!collapsed)}
+        >
+          {collapsed ? "" : "Collapse"}
         </Menu.Item>
-      ))}
-    </Menu>
+
+        <SidebarItem icon={<UserOutlined />} label="Current Admin" onClick={() => navigate("/admin")} />
+        <SidebarItem icon={<FileTextOutlined />} label="Post" onClick={() => navigate("/post")} />
+        <SidebarItem icon={<WarningOutlined />} label="Report" onClick={() => navigate("/report")} />
+        <SidebarItem icon={<TeamOutlined />} label="User" onClick={() => navigate("/user")} />
+        <SidebarItem icon={<LogoutOutlined />} label="Logout" onClick={() => navigate("/logout")} />
+      </Menu>
+    </Sider>
   );
 };
 
