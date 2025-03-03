@@ -1,42 +1,66 @@
 import React, { useState } from "react";
-import { Layout, Menu } from "antd";
-import { useNavigate } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
-import styles from "./SidebarMenu.module.css";
+import styled from "styled-components";
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   UserOutlined,
   FileTextOutlined,
-  WarningOutlined,
+  BarChartOutlined,
   TeamOutlined,
   LogoutOutlined,
+  UserAddOutlined,
 } from "@ant-design/icons";
 
-const { Sider } = Layout;
+// Styled cho Sidebar
+const SidebarContainer = styled.div<{ collapsed: boolean }>`
+  width: ${(props) => (props.collapsed ? "60px" : "250px")};
+  height: 100vh;
+  background: #2b6cb0;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.3s ease;
+`;
+
+// Styled cho nút toggle
+const ToggleButton = styled.button`
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+`;
+
+// Styled cho menu
+const Menu = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
 
 const SidebarMenu: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const navigate = useNavigate();
+
+  const menuItems = [
+    { label: "Current Admin", path: "/admin", icon: <UserOutlined /> },
+    { label: "Post", path: "/post", icon: <FileTextOutlined /> },
+    { label: "Report", path: "/report", icon: <BarChartOutlined /> },
+    { label: "User", path: "/user", icon: <TeamOutlined /> },
+    { label: "Logout", path: "/logout", icon: <LogoutOutlined /> },
+    { label: "Register", path: "/register", icon: <UserAddOutlined /> },
+  ];
 
   return (
-    <Sider className={styles.sidebar} collapsed={collapsed}>
-      <Menu theme="dark" mode="inline" className={styles.menu}>
-        <Menu.Item
-          className={styles.toggleButton}
-          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          onClick={() => setCollapsed(!collapsed)}
-        >
-          {collapsed ? "" : "Collapse"}
-        </Menu.Item>
-
-        <SidebarItem icon={<UserOutlined />} label="Current Admin" onClick={() => navigate("/admin")} />
-        <SidebarItem icon={<FileTextOutlined />} label="Post" onClick={() => navigate("/post")} />
-        <SidebarItem icon={<WarningOutlined />} label="Report" onClick={() => navigate("/report")} />
-        <SidebarItem icon={<TeamOutlined />} label="User" onClick={() => navigate("/user")} />
-        <SidebarItem icon={<LogoutOutlined />} label="Logout" onClick={() => navigate("/logout")} />
+    <SidebarContainer collapsed={collapsed}>
+      <ToggleButton onClick={() => setCollapsed(!collapsed)}>☰</ToggleButton>
+      <Menu>
+        {menuItems.map((item, index) => (
+          <SidebarItem key={index} label={item.label} path={item.path} icon={item.icon} collapsed={collapsed} />
+        ))}
       </Menu>
-    </Sider>
+    </SidebarContainer>
   );
 };
 

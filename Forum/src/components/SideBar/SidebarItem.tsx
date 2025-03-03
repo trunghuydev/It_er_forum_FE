@@ -1,21 +1,38 @@
 import React from "react";
-import { Menu } from "antd";
-import style from "./SidebarItem.module.css";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const MenuItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+  &:hover {
+    background: #1e4e8c;
+  }
+`;
+
+const IconWrapper = styled.span`
+  font-size: 20px;
+`;
 
 interface SidebarItemProps {
-  icon: React.ReactNode;
   label: string;
-  onClick?: () => void;
-
+  path: string;
+  icon: JSX.Element;
+  collapsed: boolean;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ icon, label, onClick }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({ label, path, icon, collapsed }) => {
+  const navigate = useNavigate();
+
   return (
-    <Menu className={style.menu} mode="inline">
-      <Menu.Item key={`sidebar-${label}`} icon={icon} onClick={onClick}>
-        {label}
-      </Menu.Item>
-    </Menu>
+    <MenuItem onClick={() => navigate(path)}>
+      <IconWrapper>{icon}</IconWrapper>
+      {!collapsed && <span>{label}</span>}
+    </MenuItem>
   );
 };
 
