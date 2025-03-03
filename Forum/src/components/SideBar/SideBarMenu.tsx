@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SidebarItem from "./SidebarItem";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import {
   UserOutlined,
   FileTextOutlined,
@@ -40,12 +41,25 @@ const Menu = styled.ul`
   margin: 0;
 `;
 
+const Footer = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background: #2b6cb0;
+  color: white;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+`;
+
+
 const SidebarMenu: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   const menuItems = [
     { label: "Current Admin", path: "/admin", icon: <UserOutlined /> },
-    { label: "Post", path: "/post", icon: <FileTextOutlined /> },
+    { label: "Post", path: "/Post", icon: <FileTextOutlined /> },
     { label: "Report", path: "/report", icon: <BarChartOutlined /> },
     { label: "User", path: "/user", icon: <TeamOutlined /> },
     { label: "Logout", path: "/logout", icon: <LogoutOutlined /> },
@@ -53,6 +67,7 @@ const SidebarMenu: React.FC = () => {
   ];
 
   return (
+    <>
     <SidebarContainer collapsed={collapsed}>
       <ToggleButton onClick={() => setCollapsed(!collapsed)}>☰</ToggleButton>
       <Menu>
@@ -60,7 +75,10 @@ const SidebarMenu: React.FC = () => {
           <SidebarItem key={index} label={item.label} path={item.path} icon={item.icon} collapsed={collapsed} />
         ))}
       </Menu>
+   
     </SidebarContainer>
+    <Footer> @Coppyright by Trung Huy & Trung Thanh</Footer>
+    </>
   );
 };
 

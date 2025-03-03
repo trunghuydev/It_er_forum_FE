@@ -5,6 +5,7 @@ import axios from 'axios';
 import Login from './Pages/Login';
 import Home from './Pages/Login/Home';
 import User from './model/user.model';
+import Post from "./Pages/Dashboard/Post";
 
 export const App: React.FC = () => {
   
@@ -38,6 +39,7 @@ export const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/post" element={<Post />} />
 
       </Routes>
     </Router>
