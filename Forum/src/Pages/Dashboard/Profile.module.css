@@ -1,0 +1,67 @@
+
+.mainContainer {
+    display: flex;
+    height: 100vh; 
+}
+
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+.profileCard {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    position: relative; 
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #2b6cb0;
+    margin-bottom: 15px;
+}
+
+
+.profileTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profileTable td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.profileTable td:first-child {
+    font-weight: bold;
+    text-align: left;
+    width: 40%;
+}
+
+.profileTable td:last-child {
+    text-align: right;
+    width: 60%;
+}

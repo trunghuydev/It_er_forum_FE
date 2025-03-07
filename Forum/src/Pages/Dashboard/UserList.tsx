@@ -27,6 +27,7 @@ const UserList: React.FC = () => {
         <table className={styles.userTable}>
           <thead>
             <tr>
+              <th>STT</th>
               <th>Avatar</th>
               <th>User ID</th>
               <th>Name</th>
@@ -40,7 +41,7 @@ const UserList: React.FC = () => {
           <tbody>
            
             <tr>
-              <td colSpan={8} className={styles.noData}>
+              <td colSpan={9} className={styles.noData}>
                 No users available
               </td>
             </tr>
