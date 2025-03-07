@@ -22,16 +22,15 @@ interface SidebarItemProps {
   label: string;
   path: string;
   icon: JSX.Element;
-  collapsed: boolean;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ label, path, icon, collapsed }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({ label, path, icon }) => {
   const navigate = useNavigate();
 
   return (
     <MenuItem onClick={() => navigate(path)}>
       <IconWrapper>{icon}</IconWrapper>
-      {!collapsed && <span>{label}</span>}
+      <span>{label}</span> 
     </MenuItem>
   );
 };

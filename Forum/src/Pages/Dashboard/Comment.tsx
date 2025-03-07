@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import styles from "./Post.module.css";
+import styles from "./Comment.module.css";
 import { FaSearch } from "react-icons/fa";
 import SidebarMenu from "../../components/SideBar/SideBarMenu";
 import { useNavigate } from "react-router-dom";
 
-const Post: React.FC = () => {
+const Comment: React.FC = () => {
   const navigate = useNavigate();
   const [pendingCount, setPendingCount] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,22 +25,6 @@ const Post: React.FC = () => {
             </div>
           </div>
 
-          <div className={styles.searchSortContainer}>
-            <div className={styles.searchContainer}>
-              <FaSearch className={styles.searchIcon} />
-              <input
-                type="text"
-                placeholder="Search"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className={styles.searchInput}
-              />
-            </div>
-            <select className={styles.sortDropdown}>
-              <option>Newest First</option>
-              <option>Oldest First</option>
-            </select>
-          </div>
         </div>
 
         <button className={styles.button} onClick={() => navigate("/report")}>
@@ -51,4 +35,4 @@ const Post: React.FC = () => {
   );
 };
 
-export default Post;
+export default Comment;

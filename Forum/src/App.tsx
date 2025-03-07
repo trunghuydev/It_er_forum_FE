@@ -6,6 +6,11 @@ import Login from './Pages/Login';
 import Home from './Pages/Login/Home';
 import User from './model/user.model';
 import Post from "./Pages/Dashboard/Post";
+import Report from "./Pages/Dashboard/Report";
+import Comment from "./Pages/Dashboard/Comment";
+import Profile from './Pages/Dashboard/Profile';
+import UserList from './Pages/Dashboard/UserList';
+
 
 export const App: React.FC = () => {
   
@@ -40,6 +45,10 @@ export const App: React.FC = () => {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/post" element={<Post />} />
+        <Route path="/report" element={<Report />} />
+        <Route path="/commentreport" element={<Comment />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/userlist" element={<UserList />} />
 
       </Routes>
     </Router>
