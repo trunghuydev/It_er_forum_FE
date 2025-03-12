@@ -36,7 +36,7 @@ const MenuItem = styled.li`
   display: flex;
   align-items: center;
   font-size: 16px;
-  gap: 10px; /* Khoảng cách giữa icon và chữ */
+  gap: 10px; 
 
   &:hover {
     background: #1e4e8c;
@@ -46,7 +46,7 @@ const MenuItem = styled.li`
 const MenuItemContent = styled.div`
   display: flex;
   align-items: center;
-  flex: 1; /* Căn đều phần chữ */
+  flex: 1; 
   gap: 10px;
 `;
 

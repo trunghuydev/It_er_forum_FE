@@ -73,4 +73,8 @@
     font-style: italic;
     padding: 20px;
   }
-  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+  }
