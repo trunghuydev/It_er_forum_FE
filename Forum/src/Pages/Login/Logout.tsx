@@ -10,8 +10,8 @@ const Logout: React.FC = () => {
 
     
     setTimeout(() => {
-      navigate("/login");
-    }, 5000);
+      navigate("/");
+    }, 3000);
   }, [navigate]);
 
   return (

@@ -11,39 +11,14 @@ import Comment from "./Pages/Dashboard/Comment";
 import Profile from './Pages/Dashboard/Profile';
 import UserList from './Pages/Dashboard/UserList';
 import Logout from './Pages/Login/Logout';
+import RegisterForm from './Pages/Dashboard/RegisterForm';
 
 
 export const App: React.FC = () => {
-  
-
-
-//  let arrUser: User[] = [];
-
-//  const [user, setUser] = useState<User[]>([]);
-
-
-//   useEffect( () => {
-//     // Thay localhost bằng địa chỉ IP của máy chủ
-//     const fetchData = async () => {  
-//       try {  
-//         const response = await fetch('http://10.11.77.106:3000/api/v1/user');  
-//         const result = await response.json();  
-//         arrUser.push(result)
-//         console.log(arrUser);
-        
-//       } catch (error) {  
-//         console.error('Error fetching data:', error);  
-//       }  };
-
-//       fetchData();  // Call the function immediately after rendering
-      
-    
-//   }, []);
-
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/post" element={<Post />} />
         <Route path="/report" element={<Report />} />
@@ -51,6 +26,7 @@ export const App: React.FC = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/userlist" element={<UserList />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/register" element={<RegisterForm />} />
 
       </Routes>
     </Router>

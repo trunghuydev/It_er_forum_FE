@@ -1,54 +1,61 @@
 import React from "react";
 import styles from "./Profile.module.css";
 import SidebarMenu from "../../components/SideBar/SideBarMenu";
+import avata from "../../Image/avata.png";
 
 const Profile: React.FC = () => {
   return (
     <div className={styles.mainContainer}>
       <SidebarMenu />
 
-      <div className={styles.content}>
-        <h2 className={styles.title}>User Profile</h2>
+      <div className={styles.profileContainer}>
+        
+        <div className={styles.profileHeader}>
+        <img src={avata} alt="Avatar" className={styles.avatar} />
 
-        <div className={styles.profileCard}>
-          <img
-            src="https://via.placeholder.com/100"
-            alt="Avatar"
-            className={styles.avatar}
-          />
+          <h2>Cho Thanh</h2>
+          <p>Active User</p>
+        </div>
 
-          <table className={styles.profileTable}>
-            <tbody>
-              <tr>
-                <td><strong>User ID:</strong></td>
-                <td>123</td>
-              </tr>
-              <tr>
-                <td><strong>Name:</strong></td>
-                <td>cho thanh</td>
-              </tr>
-              <tr>
-                <td><strong>Username:</strong></td>
-                <td>thanh123</td>
-              </tr>
-              <tr>
-                <td><strong>Email:</strong></td>
-                <td>thanh123@</td>
-              </tr>
-              <tr>
-                <td><strong>Phone:</strong></td>
-                <td>121212</td>
-              </tr>
-              <tr>
-                <td><strong>Age:</strong></td>
-                <td>25</td>
-              </tr>
-              <tr>
-                <td><strong>Status:</strong></td>
-                <td>Active</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className={styles.profileForm}>
+          <h3>Personal Information</h3>
+          <div className={styles.formRow}>
+            <div className={styles.inputGroup}>
+              <label>User ID</label>
+              <input type="text" defaultValue="123" disabled />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Username</label>
+              <input type="text" defaultValue="thanh123"disabled />
+            </div>
+          </div>
+
+          <div className={styles.formRow}>
+            <div className={styles.inputGroup}>
+              <label>Name</label>
+              <input type="text" defaultValue="Cho Thanh" disabled/>
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Age</label>
+              <input type="number" defaultValue="25" disabled/>
+            </div>
+          </div>
+
+          <div className={styles.formRow}>
+            <div className={styles.inputGroup}>
+              <label>Email</label>
+              <input type="email" defaultValue="thanh123@" disabled/>
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Phone</label>
+              <input type="tel" defaultValue="121212" disabled/>
+            </div>
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label>Status</label>
+            <input type="text" defaultValue="Active" disabled />
+          </div>
         </div>
       </div>
     </div>
