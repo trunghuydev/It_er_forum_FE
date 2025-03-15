@@ -13,7 +13,7 @@ const Profile: React.FC = () => {
         <div className={styles.profileHeader}>
         <img src={avata} alt="Avatar" className={styles.avatar} />
 
-          <h2>Cho Thanh</h2>
+          <h2> Thanh</h2>
           <p>Active User</p>
         </div>
 
@@ -33,7 +33,7 @@ const Profile: React.FC = () => {
           <div className={styles.formRow}>
             <div className={styles.inputGroup}>
               <label>Name</label>
-              <input type="text" defaultValue="Cho Thanh" disabled/>
+              <input type="text" defaultValue="Thanh" disabled/>
             </div>
             <div className={styles.inputGroup}>
               <label>Age</label>

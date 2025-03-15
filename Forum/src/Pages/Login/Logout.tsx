@@ -11,7 +11,7 @@ const Logout: React.FC = () => {
     
     setTimeout(() => {
       navigate("/");
-    }, 3000);
+    }, 2000);
   }, [navigate]);
 
   return (

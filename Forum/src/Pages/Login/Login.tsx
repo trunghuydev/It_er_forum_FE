@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
+
 const Login: React.FC = () => {
   const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +14,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     if (email === "admin" && password === "123456") {
       setShowError(false);
-      navigate("/Home");
+      navigate("/post");
     } else {
       setShowError(true);
     }
