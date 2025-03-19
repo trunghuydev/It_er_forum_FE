@@ -7,9 +7,9 @@ const UserList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const defaultUsers = [
-    { id: 1, avatar, userId: "0001", name: "NTA", username: "NTA1", email: "NTA@gmail.com", phone: "123456", age: 25, status: "Active", options: ["Accept", "Restricted", "Active"] },
-    { id: 2, avatar, userId: "0002", name: "User 2", username: "user2", email: "user2@example.com", phone: "987654", age: 30, status: "Inactive", options: ["Accept", "Restricted", "Active"] },
-    { id: 3, avatar, userId: "0003", name: "User 3", username: "user3", email: "user3@example.com", phone: "654321", age: 22, status: "Pending", options: ["Accept", "Restricted", "Active"] },
+    { id: 1, avatar, userId: "0001", name: "NTA", username: "NTA1", email: "NTA@gmail.com", phone: "123456", age: 25, status: "Active", options: ["Ban", "Restricted"] },
+    { id: 2, avatar, userId: "0002", name: "User 2", username: "user2", email: "user2@example.com", phone: "987654", age: 30, status: "Inactive", options: ["Ban", "Restricted"] },
+    { id: 3, avatar, userId: "0003", name: "User 3", username: "user3", email: "user3@example.com", phone: "654321", age: 22, status: "Pending", options: ["Ban", "Restricted"] },
   ];
 
   return (

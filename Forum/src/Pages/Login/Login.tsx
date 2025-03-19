@@ -10,23 +10,37 @@ const Login: React.FC = () => {
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email === "admin" && password === "123456") {
-      setShowError(false);
-      navigate("/post");
-    } else {
-      setShowError(true);
-    }
-  };
-  const api = 
-  function loginHandle() {
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (email === "admin" && password === "123456") {
+  //     setShowError(false);
+  //     navigate("/post");
+  //   } else {
+  //     setShowError(true);
+  //   }
+  // };
+ 
+  // const handleLogin =async(e:React.FormEvent)=>{
+  //   e.preventDefault;
+  //   setShowError("");
 
-  }
+  //   try{
+  //     const response = await api.post("/auth/login",{email,password});
+  //     const token = response.data.token; 
+
+  //     localStorage.setItem("token", token);
+  //     alert("Login seccessfull");
+  //     navigate("/post")
+  //   }catch(err:any){
+  //     setShowError(err.response?.data?.message);
+  //   }
+  // };
+
+
   return (
     <div className={styles.loginContainer}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <div className={styles.inputGroup}>
           <p>Email</p>
           <input

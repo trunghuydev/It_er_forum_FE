@@ -47,6 +47,8 @@ const Sidebar: React.FC = () => {
           <DropdownItem onClick={() => navigate("/post")}><Dot /> Post Report</DropdownItem>
           <DropdownItem onClick={() => navigate("/userlist")}><Dot /> User</DropdownItem>
           <DropdownItem onClick={() => navigate("/commentreport")}><Dot /> Comment report</DropdownItem>
+          <DropdownItem onClick={() => navigate("/UserStatistic")}><Dot /> UserStatistic</DropdownItem>
+          <DropdownItem onClick={() => navigate("/TagStatistic")}><Dot /> TagStatistic</DropdownItem>
         </DropdownMenu>
 
         <SidebarItem icon={<LogoutOutlined />} text="Logout" onClick={() => navigate("/logout")} />
