@@ -1,0 +1,85 @@
+
+.layoutContainer {
+    display: flex;
+}
+
+/* Nội dung chính */
+.postContainer {
+    flex: 1;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    margin-left: 15vw; 
+    width: calc(100% - 17vw); 
+    padding: 6rem 2rem 2rem; 
+}
+
+
+
+ /*  ------------------------------------------------------------------------------------------------------  */
+
+  
+  /*  CSS CỦA PostDisplay  */
+  .postDisplayContainer {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .postDisplayTable {
+    width: 100%;
+    max-width: 100%; 
+    border-collapse: collapse;
+    background: white;
+    border-radius: 0.5rem;
+    overflow: auto;
+    border: 1px solid #ddd;
+    table-layout: fixed; 
+  }
+  
+  .postDisplayTable th, .postDisplayTable td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    max-width: 200px; 
+}
+
+
+
+  .postDisplayTable th:last-child, .postDisplayTable td:last-child {
+    border-right: none;
+  }
+
+  /* Title */
+.titleCell {
+    color: #1e40af;
+    cursor: pointer;
+    max-width: 250px; 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Hover đổi màu */
+.titleCell:hover {
+    color: #2563eb;
+}
+  
+  /* Trạng thái */
+ /* Màu cho trạng thái Pending */
+.postStatusPending {
+    background-color: #f59e0b; /* Màu vàng */
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 6rem;
+    text-align: center;
+}
+  

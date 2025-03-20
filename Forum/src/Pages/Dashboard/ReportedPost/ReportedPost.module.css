@@ -1,0 +1,106 @@
+/* 📌 Container tổng */
+.mainContainer {
+  display: flex;
+}
+
+/* 📌 Sidebar cố định */
+.sidebarMenu {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+}
+
+/* 📌 Nội dung chính */
+.container {
+  flex: 1;
+  margin-left: 250px;
+  padding: 4rem 3rem;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+
+/* 📌 Bảng hiển thị danh sách báo cáo */
+.reportedDisplayContainer {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 Bảng */
+.reportedTable {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: auto;
+  border: 1px solid #ddd;
+  table-layout: fixed;
+}
+
+/*  Header cột */
+.reportedTable th {
+  padding: 1rem;
+  text-align: left;
+  background-color: #f3f4f6;
+  border-bottom: 2px solid #ddd;
+}
+
+/*  Các ô dữ liệu */
+.reportedTable td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.reportedTable th, 
+.reportedTable td {
+    border-right: 1px solid #ddd; /* Thêm đường kẻ dọc */
+}
+
+/* Bỏ viền phải ở cột cuối cùng */
+.reportedTable th:last-child, 
+.reportedTable td:last-child {
+    border-right: none;
+}
+
+
+/*  Avatar */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/*  Tiêu đề báo cáo */
+.titleCell {
+  color: #1e40af;
+  cursor: pointer;
+  max-width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Hover đổi màu */
+.titleCell:hover {
+  color: #2563eb;
+}
+
+/*  Không có dữ liệu */
+.noReports {
+  text-align: center;
+  padding: 1rem;
+  color: #888;
+  font-style: italic;
+}

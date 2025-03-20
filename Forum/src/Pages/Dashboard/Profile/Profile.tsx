@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Profile.module.css";
-import SidebarMenu from "../../components/SideBar/SideBarMenu";
-import avata from "../../Image/avata.png";
+import SidebarMenu from "../../../components/SideBar/SideBarMenu";
+import avata from "../../../Image/avata.png";
 
 const Profile: React.FC = () => {
   return (

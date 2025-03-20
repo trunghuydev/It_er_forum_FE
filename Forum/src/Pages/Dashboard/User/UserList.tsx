@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./User.module.css";
-import SidebarMenu from "../../components/SideBar/SideBarMenu";
-import avatar from "../../Image/avata.png";
+import SidebarMenu from "../../../components/SideBar/SideBarMenu";
+import avatar from "../../../Image/avata.png";
 
 const UserList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");

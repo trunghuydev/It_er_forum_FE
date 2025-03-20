@@ -10,15 +10,15 @@ const Login: React.FC = () => {
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (email === "admin" && password === "123456") {
-  //     setShowError(false);
-  //     navigate("/post");
-  //   } else {
-  //     setShowError(true);
-  //   }
-  // };
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email === "admin" && password === "123456") {
+      setShowError(false);
+      navigate("/post");
+    } else {
+      setShowError(true);
+    }
+  };
  
   // const handleLogin =async(e:React.FormEvent)=>{
   //   e.preventDefault;

@@ -8,6 +8,7 @@ import {
   UserAddOutlined,
   DownOutlined,
   UpOutlined,
+  LineChartOutlined,
 } from "@ant-design/icons";
 
 const SidebarItem: React.FC<{
@@ -44,15 +45,22 @@ const Sidebar: React.FC = () => {
         </MenuItem>
 
         <DropdownMenu isOpen={isDropdownOpen}>
-          <DropdownItem onClick={() => navigate("/post")}><Dot /> Post Report</DropdownItem>
+        <DropdownItem onClick={() => navigate("/post")}><Dot /> Post </DropdownItem>
+          <DropdownItem onClick={() => navigate("/reportedpost")}><Dot /> Post Report</DropdownItem>
           <DropdownItem onClick={() => navigate("/userlist")}><Dot /> User</DropdownItem>
           <DropdownItem onClick={() => navigate("/commentreport")}><Dot /> Comment report</DropdownItem>
-          <DropdownItem onClick={() => navigate("/UserStatistic")}><Dot /> UserStatistic</DropdownItem>
-          <DropdownItem onClick={() => navigate("/TagStatistic")}><Dot /> TagStatistic</DropdownItem>
+
+
+          {/* <DropdownItem onClick={() => navigate("/UserStatistic")}><Dot /> UserStatistic</DropdownItem>
+          <DropdownItem onClick={() => navigate("/TagStatistic")}><Dot /> TagStatistic</DropdownItem> */}
+
+          
         </DropdownMenu>
 
+
+        <SidebarItem icon={<LineChartOutlined />} text="Statistic" onClick={() => navigate("/statistic")} />
         <SidebarItem icon={<LogoutOutlined />} text="Logout" onClick={() => navigate("/logout")} />
-        <SidebarItem icon={<UserAddOutlined />} text="Register" onClick={() => navigate("/register")} />
+        {/* <SidebarItem icon={<UserAddOutlined />} text="Register" onClick={() => navigate("/register")} /> */}
       </Menu>
 
       <Footer>© Copyright By Trung Huy & Trung Thành</Footer>

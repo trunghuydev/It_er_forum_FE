@@ -4,14 +4,17 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from 'axios';
 import Login from './Pages/Login/Login';
 import Home from './Pages/Login/Home';
-import User from './model/user.model';
-import Post from "./Pages/Dashboard/Post";
-import Report from "./Pages/Dashboard/Report";
-import Comment from "./Pages/Dashboard/Comment";
-import Profile from './Pages/Dashboard/Profile';
-import UserList from './Pages/Dashboard/UserList';
+import ReportedPost from './Pages/Dashboard/ReportedPost/ReportedPost';
+import Comment from "./Pages/Dashboard/Comment/Comment";
+import Profile from './Pages/Dashboard/Profile/Profile';
+import UserList from './Pages/Dashboard/User/UserList';
 import Logout from './Pages/Login/Logout';
-import RegisterForm from './Pages/Dashboard/RegisterForm';
+import Statistic from './Pages/Dashboard/Statistic/Statistic';
+import PostDetail from './Pages/Dashboard/Post/PostDetail';
+import Post from './Pages/Dashboard/Post/Post';
+import ReportDetail from './Pages/Dashboard/ReportedPost/ReportedDetail';
+
+
 
 
 export const App: React.FC = () => {
@@ -21,12 +24,16 @@ export const App: React.FC = () => {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/post" element={<Post />} />
-        <Route path="/report" element={<Report />} />
+        <Route path="/reportedpost" element={<ReportedPost />} />
+        <Route path="/report-detail/:report_id" element={<ReportDetail />} />
         <Route path="/commentreport" element={<Comment />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/userlist" element={<UserList />} />
+        <Route path="/statistic" element={<Statistic />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/postdetail/:id" element={<PostDetail />} />
+       
+        {/* <Route path="/register" element={<RegisterForm />} /> */}
 
       </Routes>
     </Router>

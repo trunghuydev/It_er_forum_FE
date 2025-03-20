@@ -1,0 +1,115 @@
+/*  Container tổng */
+.layoutContainer {
+    display: flex;
+    height: 5vh;
+}
+
+/*  Sidebar cố định */
+.sidebarMenu {
+    width: 250px; 
+    height: 100vh;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    background: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+}
+
+/*  Nội dung chính */
+.contentContainer {
+    flex: 1;
+    margin-left: 250px; 
+    padding: 4rem 3rem;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*  Wrapper bọc PostDetail */
+.postDetailWrapper {
+    width: 900px;
+}
+
+/*  PostDetail */
+.postDetailContainer {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/*  Thông tin User */
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/*  Tiêu đề bài viết */
+.postTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1e293b;
+    margin-top: 1rem;
+}
+
+/*  Nội dung bài viết */
+.postContent {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+}
+
+/*  Hình ảnh bài viết */
+.postImage {
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+/*  Trạng thái & Nút hành động */
+.statusActions {
+    width: 100%;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*  Nút hành động */
+.actionButtons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.actionButtons button {
+    flex-grow: 1;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    font-size: 1rem;
+}
+
+.restricted { background-color: #eab308; }
+.banned { background-color: #dc2626; }
+.approved { background-color: #16a34a; }

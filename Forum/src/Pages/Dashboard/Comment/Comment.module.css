@@ -1,0 +1,60 @@
+/* Container */
+.reportedDisplayContainer {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Bảng hiển thị */
+.reportedTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: auto;
+  border: 1px solid #ddd;
+}
+
+/* Tiêu đề bảng */
+.reportedTable th {
+  background: #f4f4f4;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Ô dữ liệu */
+.reportedTable td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+.reportedTable th, 
+.reportedTable td {
+    border-right: 1px solid #ddd; 
+}
+
+/* Bỏ viền phải ở cột cuối cùng */
+.reportedTable th:last-child, 
+.reportedTable td:last-child {
+    border-right: none;
+}
+
+
+/* Hình avatar */
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Khi không có báo cáo */
+.noReports {
+  text-align: center;
+  padding: 1rem;
+  font-style: italic;
+  color: #888;
+}
