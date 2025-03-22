@@ -2,11 +2,13 @@ import React from "react";
 import styles from "../../Pages/Dashboard/Comment/Comment.module.css";
 
 interface ReportedComment {
-  report_id: string;
+  user_id: string;
   user_name: string;
   ava_img_path: string;
-  report_title: string;
-  date_reported: string;
+  comment_id:string;
+  comment_content:string;
+  date_comment:string;
+  replies_num:String;
 }
 
 interface ReportCmtDisplayProps {
@@ -19,24 +21,24 @@ const ReportCmtDisplay: React.FC<ReportCmtDisplayProps> = ({ reports }) => {
       <table className={styles.reportedTable}>
         <thead>
           <tr>
-            <th>Report ID</th>
-            <th>User</th>
+            <th>User ID</th>
+            <th>User Name</th>
             <th>Avatar</th>
-            <th>Report Title</th>
+            <th>Comment Content</th>
             <th>Date Reported</th>
           </tr>
         </thead>
         <tbody>
           {reports.length > 0 ? (
             reports.map((report) => (
-              <tr key={report.report_id}>
-                <td>{report.report_id}</td>
+              <tr key={report.user_id}>
+                <td>{report.user_id}</td>
                 <td>{report.user_name}</td>
                 <td>
                   <img src={report.ava_img_path} alt="Avatar" className={styles.avatar} />
                 </td>
-                <td>{report.report_title}</td>
-                <td>{new Date(report.date_reported).toLocaleDateString()}</td>
+                <td>{report.comment_content}</td>
+                <td>{new Date(report.date_comment).toLocaleDateString()}</td>
               </tr>
             ))
           ) : (

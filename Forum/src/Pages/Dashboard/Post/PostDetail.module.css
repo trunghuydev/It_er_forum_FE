@@ -110,6 +110,6 @@
     font-size: 1rem;
 }
 
-.restricted { background-color: #eab308; }
-.banned { background-color: #dc2626; }
-.approved { background-color: #16a34a; }
+
+.actionButtons button .banned { background-color: #dc2626; }
+.actionButtons button .approved { background-color: #16a34a; }

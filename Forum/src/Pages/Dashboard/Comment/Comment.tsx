@@ -6,25 +6,31 @@ import ReportCmtDisplay from "../../../components/Comment/ReportCmtDislpay";
 
 const fakeReports = [
   { 
-    report_id: "1", 
-    user_name: "JohnDoe", 
-    ava_img_path: "https://i.pravatar.cc/100?img=1", 
-    report_title: "Spam Comment", 
-    date_reported: "2025-03-20" 
+    user_id: "1",
+    user_name: "cho thanh",
+    ava_img_path: "https://i.pravatar.cc/100?img=1",
+    comment_id:"124",
+    comment_content:"Spam Comment",
+    date_comment:"2025-03-20" ,
+    replies_num: "12",
   },
   { 
-    report_id: "2", 
-    user_name: "AliceSmith", 
-    ava_img_path: "https://i.pravatar.cc/100?img=2", 
-    report_title: "Offensive Language", 
-    date_reported: "2025-03-19" 
+    user_id: "2",
+    user_name: " thanhcho",
+    ava_img_path: "https://i.pravatar.cc/100?img=1",
+    comment_id:"125",
+    comment_content:"Spam Comment",
+    date_comment:"2025-03-20" ,
+    replies_num: "13",
   },
   { 
-    report_id: "3", 
-    user_name: "DavidBrown", 
-    ava_img_path: "https://i.pravatar.cc/100?img=3", 
-    report_title: "False Information", 
-    date_reported: "2025-03-18" 
+    user_id: "3",
+    user_name: "cho thanh",
+    ava_img_path: "https://i.pravatar.cc/100?img=1",
+    comment_id:"125",
+    comment_content:"Spam Comment",
+    date_comment:"2025-03-20" ,
+    replies_num: "14",
   },
 ];
 
@@ -38,7 +44,7 @@ const Comment: React.FC = () => {
       <div className={styles.container}>
         <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} pendingCount={reports.length} />
 
-        {/* Hiển thị danh sách comment bị báo cáo */}
+       
         <ReportCmtDisplay reports={reports} />
       </div>
     </div>

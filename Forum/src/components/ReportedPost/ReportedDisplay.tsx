@@ -1,9 +1,10 @@
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../Pages/Dashboard/ReportedPost/ReportedPost.module.css";
 
 interface Report {
-  report_id: string;
+  reported_id: string;
   user_name: string;
   ava_img_path: string;
   report_title: string;
@@ -32,8 +33,8 @@ const ReportedDisplay: React.FC<ReportedDisplayProps> = ({ reports }) => {
         <tbody>
           {reports.length > 0 ? (
             reports.map((report) => (
-              <tr key={report.report_id}>
-                <td>{report.report_id}</td>
+              <tr key={report.reported_id}>
+                <td>{report.reported_id}</td>
                 <td>{report.user_name}</td>
                 <td>
                   <img src={report.ava_img_path} alt="Avatar" className={styles.avatar} />
@@ -41,7 +42,7 @@ const ReportedDisplay: React.FC<ReportedDisplayProps> = ({ reports }) => {
               
                 <td
                   className={styles.titleCell}
-                  onClick={() => navigate(`/report-detail/${report.report_id}`)}
+                  onClick={() => navigate(`/report-detail/${report.reported_id}`)}
                 >
                   {report.report_title}
                 </td>
