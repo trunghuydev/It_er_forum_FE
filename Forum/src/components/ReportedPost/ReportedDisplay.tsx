@@ -1,14 +1,14 @@
-
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "../../Pages/Dashboard/ReportedPost/ReportedPost.module.css";
+import { useNavigate } from "react-router-dom";
 
+// Interface cho báo cáo
 interface Report {
-  reported_id: string;
-  user_name: string;
-  ava_img_path: string;
+  report_id: string;
+  reported_user_id: string;
+  reported_user_name: string;
   report_title: string;
-  date_reported: string;
+  ava_img_path: string | null;
 }
 
 interface ReportedDisplayProps {
@@ -23,35 +23,37 @@ const ReportedDisplay: React.FC<ReportedDisplayProps> = ({ reports }) => {
       <table className={styles.reportedTable}>
         <thead>
           <tr>
-            <th>Report ID</th>
-            <th>User</th>
+            <th>User ID</th>
+            <th>User Name</th>
             <th>Avatar</th>
             <th>Report Title</th>
-            <th>Date Reported</th>
           </tr>
         </thead>
         <tbody>
           {reports.length > 0 ? (
             reports.map((report) => (
-              <tr key={report.reported_id}>
-                <td>{report.reported_id}</td>
-                <td>{report.user_name}</td>
+              <tr
+                key={report.report_id}
+                onClick={() => navigate(`/report/${report.report_id}`)} // Điều hướng đến ReportDetail
+                style={{ cursor: "pointer" }}
+              >
+                <td>{report.reported_user_id}</td>
+                <td>{report.reported_user_name || "Unknown"}</td>
                 <td>
-                  <img src={report.ava_img_path} alt="Avatar" className={styles.avatar} />
+                  <img
+                    src={report.ava_img_path || "https://i.pravatar.cc/100"}
+                    alt="Avatar"
+                    className={styles.avatar}
+                  />
                 </td>
-              
-                <td
-                  className={styles.titleCell}
-                  onClick={() => navigate(`/report-detail/${report.reported_id}`)}
-                >
-                  {report.report_title}
-                </td>
-                <td>{new Date(report.date_reported).toLocaleDateString()}</td>
+                <td>{report.report_title || "N/A"}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={5} className={styles.noReports}>No reports available</td>
+              <td colSpan={4} className={styles.noReports}>
+                No reported posts
+              </td>
             </tr>
           )}
         </tbody>

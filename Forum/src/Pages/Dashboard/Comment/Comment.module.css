@@ -1,20 +1,31 @@
-/* Container */
+
+.container {
+  margin-left: 17vw; 
+  padding: 6rem 1.5rem 1.5rem 1.5rem; 
+  background-color: #f4f4f4;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+
 .reportedDisplayContainer {
   margin-top: 1.5rem;
   padding: 1.5rem;
   background: white;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; 
+  box-sizing: border-box;
 }
 
-/* Bảng hiển thị */
+
 .reportedTable {
-  width: 100%;
+  width: 100%; 
   border-collapse: collapse;
   background: white;
   border-radius: 0.5rem;
-  overflow: auto;
   border: 1px solid #ddd;
+  table-layout: auto;
 }
 
 /* Tiêu đề bảng */
@@ -23,6 +34,7 @@
   padding: 1rem;
   text-align: left;
   border-bottom: 2px solid #ddd;
+  white-space: nowrap;
 }
 
 /* Ô dữ liệu */
@@ -30,18 +42,48 @@
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.reportedTable th, 
+
+/* Định nghĩa chiều rộng tối đa cho các cột */
+.reportedTable th:nth-child(1),
+.reportedTable td:nth-child(1) {
+  width: 20%; 
+}
+
+.reportedTable th:nth-child(2),
+.reportedTable td:nth-child(2) {
+  width: 15%; 
+}
+
+.reportedTable th:nth-child(3),
+.reportedTable td:nth-child(3) {
+  width: 10%; 
+}
+
+.reportedTable th:nth-child(4),
+.reportedTable td:nth-child(4) {
+  width: 35%; 
+}
+
+.reportedTable th:nth-child(5),
+.reportedTable td:nth-child(5) {
+  width: 20%; 
+}
+
+/* Đường viền dọc giữa các cột */
+.reportedTable th,
 .reportedTable td {
-    border-right: 1px solid #ddd; 
+  border-right: 1px solid #ddd;
 }
 
 /* Bỏ viền phải ở cột cuối cùng */
-.reportedTable th:last-child, 
+.reportedTable th:last-child,
 .reportedTable td:last-child {
-    border-right: none;
+  border-right: none;
 }
-
 
 /* Hình avatar */
 .avatar {
@@ -57,4 +99,11 @@
   padding: 1rem;
   font-style: italic;
   color: #888;
+}
+
+/* Thông báo lỗi */
+.error {
+  color: #dc2626;
+  text-align: center;
+  padding: 1rem;
 }

@@ -3,24 +3,22 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { DownOutlined } from "@ant-design/icons";
 
-
-
 interface SidebarItemProps {
   label: string;
   path?: string;
   icon: JSX.Element;
-  subMenu?: { label: string; path: string }[]; 
+  subMenu?: { label: string; path: string }[];
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({ label, path, icon, subMenu }) => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     if (subMenu) {
-      setIsOpen(!isOpen); 
+      setIsOpen(!isOpen);
     } else if (path) {
-      navigate(path); 
+      navigate(path);
     }
   };
 
@@ -31,11 +29,11 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ label, path, icon, subMenu })
           <IconWrapper>{icon}</IconWrapper>
           <span>{label}</span>
         </div>
-        {subMenu && <DownOutlined />} 
+        {subMenu && <DownOutlined />}
       </MenuItem>
 
       {isOpen && subMenu && (
-        <DropdownMenu>
+        <DropdownMenu $isOpen={isOpen}>
           {subMenu.map((item, index) => (
             <DropdownItem key={index} onClick={() => navigate(item.path)}>
               {item.label}
@@ -48,10 +46,11 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ label, path, icon, subMenu })
 };
 
 export default SidebarItem;
+
 const MenuItem = styled.li`
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Căn giữa và thêm icon dropdown */
+  justify-content: space-between;
   gap: 12px;
   padding: 15px;
   cursor: pointer;
@@ -65,12 +64,15 @@ const IconWrapper = styled.span`
   font-size: 20px;
 `;
 
-const DropdownMenu = styled.ul`
+const DropdownMenu = styled.ul<{ $isOpen: boolean }>`
   list-style: none;
   padding: 0;
   margin: 0;
   background: #1e4e8c;
   position: relative;
+  max-height: ${({ $isOpen }) => ($isOpen ? "300px" : "0")};
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
 `;
 
 const DropdownItem = styled.li`

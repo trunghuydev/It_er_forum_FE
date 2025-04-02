@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import styles from "./ReportedDetail.module.css";
+import styles from "./ReportUserDetail.module.css"; // Tạo file CSS mới
 import SidebarMenu from "../../../components/SideBar/SideBarMenu";
 import { useFetch } from "../../../hooks/useFetch";
+import avatar from "../../../Image/avata.png";
 import axios from "axios";
-import ImageSlider from "../../../components/ImageSlide/ImageSlide";
 
-// Interface cho nội dung bài viết bị báo cáo
+// Interface cho nội dung người dùng bị báo cáo
 interface ReportContent {
-  post_id: string;
-  post_title: string;
-  post_content: string;
-  img_url: string[];
-  date_updated: string;
+  user_id: string;
+  ava_img_path: string | null;
+  email: string;
+  user_name: string;
+  status: string;
+  role: string;
 }
 
 // Interface cho báo cáo
 interface Report {
   reported_user_id: string;
-  reported_id: string;
   reported_user_name: string;
+  reported_id: string;
   report_title: string;
   report_body: string;
   subject: string;
@@ -37,14 +38,13 @@ interface ApiResponse {
   timestamp: number;
 }
 
-const ReportDetail: React.FC = () => {
-  const { report_id } = useParams<{ report_id: string }>();
-
+const ReportUserDetail: React.FC = () => {
+  const { report_id } = useParams<{ report_id: string }>(); // Lấy report_id từ URL
   const navigate = useNavigate();
 
   // Fetch dữ liệu từ API
   const { data, loading, error, refetch } = useFetch<ApiResponse>(
-    `http://localhost:3000/api/v1/report/admin/detail/Post/${report_id}`,
+    `http://localhost:3000/api/v1/report/admin/detail/User/${report_id}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken") || "your-token-here"}`,
@@ -55,54 +55,31 @@ const ReportDetail: React.FC = () => {
   const report = data?.data;
   const [status, setStatus] = useState<string>(report?.status || "Pending");
 
-
-
-
-  // update status leen BE 
+  // Xử lý cập nhật trạng thái
   const handleAction = async (newStatus: "Skipped" | "Restricted" | "Banned") => {
     const accessToken = localStorage.getItem("accessToken") || "your-token-here";
     try {
-      
       switch (newStatus) {
         case "Skipped":
           await axios.delete(
             `http://localhost:3000/api/v1/report/skip-report/${report_id}`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
-          );  setStatus(newStatus);
-          setTimeout(() => navigate("/reportedpost"), 5);
-
+          );
+          setStatus(newStatus);
+          setTimeout(() => navigate("/rpuserlist"), 5);
           break;
-        case "Restricted" || "Banned":
-          console.log(report);
-
-          // const accessToken = localStorage.getItem("accessToken") || "your-token-here";
-          // console.log("reported user id :", report?.reported_user_id);
-          // console.log("reported id :", report_id);
-
-
+        case "Restricted":
+        case "Banned":
           await axios.patch(
             `http://localhost:3000/api/v1/users/admin/${report?.reported_user_id}`,
             { status: newStatus },
             { headers: { Authorization: `Bearer ${accessToken}` } }
           );
           setStatus(newStatus);
-          setTimeout(() => navigate("/reportedpost"), 5);
-
+          setTimeout(() => navigate("/rpuserlist"), 5);
+          break;
         default:
           break;
-          case  "Banned":
-            console.log(report);
-
-            await axios.patch(
-              `http://localhost:3000/api/v1/users/admin/${report?.reported_user_id}`,
-              { status: newStatus },
-              { headers: { Authorization: `Bearer ${accessToken}` } }
-            );
-            setStatus(newStatus);
-            setTimeout(() => navigate("/reportedpost"), 5);
-  
-          
-            break;
       }
     } catch (err) {
       console.error("Failed to update status:", err);
@@ -135,12 +112,13 @@ const ReportDetail: React.FC = () => {
     <div className={styles.mainContainer}>
       <SidebarMenu />
       <div className={styles.container}>
+        <h2 className={styles.title}>Report User Detail</h2>
         <div className={styles.reportDetailWrapper}>
           <div className={styles.reportDetailContainer}>
             <div className={styles.userInfo}>
-              <strong>Reported by User ID:</strong> {report.reported_user_id}
+              <strong>Reported User ID:</strong> {report.reported_user_id}
             </div>
-            <h2 className={styles.reportTitle}>{report.report_title}</h2>
+            <h3 className={styles.reportTitle}>{report.report_title}</h3>
             <div className={styles.reportContent}>
               <p><strong>Report Details:</strong> {report.report_body}</p>
               <p>
@@ -148,23 +126,27 @@ const ReportDetail: React.FC = () => {
                 {new Date(report.date_reported).toLocaleDateString()}
               </p>
             </div>
-            <div className={styles.postDetail}>
-              <h3>Reported Post</h3>
-              <h4 className={styles.postTitle}>{report.content.post_title}</h4>
-              <p className={styles.postContent}>{report.content.post_content}</p>
-              <ImageSlider images={report.content.img_url} /> {/* Sử dụng ImageSlider */}
-              <p>
-                <strong>Last Updated:</strong>{" "}
-                {new Date(report.content.date_updated).toLocaleDateString()}
-              </p>
+            <div className={styles.userDetail}>
+              <h4>Reported User Information</h4>
+              <div className={styles.userInfoWrapper}>
+                <div className={styles.avatarSection}>
+                  <img
+                    src={report.content.ava_img_path || avatar}
+                    alt="Avatar"
+                    className={styles.avatar}
+                  />
+                </div>
+                <div className={styles.infoSection}>
+                  <p><strong>User ID:</strong> {report.content.user_id}</p>
+                  <p><strong>Username:</strong> {report.content.user_name}</p>
+                  <p><strong>Email:</strong> {report.content.email}</p>
+                  <p><strong>Status:</strong> {status}</p>
+                  <p><strong>Role:</strong> {report.content.role}</p>
+                </div>
+              </div>
             </div>
             <div className={styles.statusActions}>
-              <p>
-                Current Status:{" "}
-                <span className={styles[`status-${status.toLowerCase()}`]}>
-                  {status}
-                </span>
-              </p>
+             
               <div className={styles.actionButtons}>
                 <button className={styles.skip} onClick={() => handleAction("Skipped")}>
                   Skip
@@ -179,9 +161,15 @@ const ReportDetail: React.FC = () => {
             </div>
           </div>
         </div>
+        <button
+          onClick={() => navigate("/rpuserlist")} // Quay lại danh sách
+          className={styles.backButton}
+        >
+          Back to Reported Users
+        </button>
       </div>
     </div>
   );
 };
 
-export default ReportDetail;
+export default ReportUserDetail;

@@ -1,114 +1,154 @@
+/* Container tổng */
 .mainContainer {
   display: flex;
-  height: 100vh; 
-  width: 100vw;  
 }
 
-.sidebar {
-  width: 250px;
-  height: 100vh;
-  background: #2b6cb0;
-  color: white;
-  position: fixed;
-  left: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-}
-
-.content {
-  flex-grow: 1;
+/* Nội dung chính */
+.container {
+  flex: 1;
   margin-left: 250px;
+  padding: 4rem 3rem;
+  background-color: #f4f4f4;
   min-height: 100vh;
-  overflow: auto;
-  padding: 20px;
-  background: #f9f9f9;
 }
 
-.title {
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
+/* Bảng hiển thị danh sách */
+.reportedDisplayContainer {
+  margin-top: 5.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 600px; 
+  overflow-y: auto;
+  overflow-x: auto;
+  position: relative;
 }
 
-.searchInput {
+/* Bảng */
+.reportedTable {
   width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 16px;
-  font-size: 16px;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.userTable {
-  width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   background: white;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.userTable th, .userTable td {
-  padding: 12px;
+  border-radius: 0.5rem;
   border: 1px solid #ddd;
+}
+
+/* Cố định header của bảng */
+.reportedTable thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f3f4f6;
+}
+
+/* Header cột */
+.reportedTable th {
+  padding: 1rem; 
   text-align: left;
+  background-color: #f3f4f6;
+  border-bottom: 2px solid #ddd;
+  white-space: nowrap;
+  font-size: 16px; 
 }
 
-.userTable th {
-  background: #2b6cb0;
-  color: white;
+/* Các ô dữ liệu */
+.reportedTable td {
+  padding: 1rem; 
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
 }
 
-.userTable tr:hover {
-  background: #f1f1f1;
+.reportedTable th,
+.reportedTable td {
+  border-right: 1px solid #ddd;
 }
 
-.noData {
-  text-align: center;
-  font-style: italic;
-  padding: 20px;
-  color: #777;
+/* Bỏ viền phải ở cột cuối cùng */
+.reportedTable th:last-child,
+.reportedTable td:last-child {
+  border-right: none;
 }
 
+/* Phân bổ chiều rộng cột tối thiểu */
+.reportedTable th:nth-child(1),
+.reportedTable td:nth-child(1) {
+  min-width: 50px; /* No. */
+}
+
+.reportedTable th:nth-child(2),
+.reportedTable td:nth-child(2) {
+  min-width: 100px; /* Avatar */
+}
+
+.reportedTable th:nth-child(3),
+.reportedTable td:nth-child(3) {
+  min-width: 150px; /* User ID */
+}
+
+.reportedTable th:nth-child(4),
+.reportedTable td:nth-child(4) {
+  min-width: 150px; /* Name */
+}
+
+.reportedTable th:nth-child(5),
+.reportedTable td:nth-child(5) {
+  min-width: 200px; /* Email */
+}
+
+.reportedTable th:nth-child(6),
+.reportedTable td:nth-child(6) {
+  min-width: 150px; /* Phone */
+}
+
+.reportedTable th:nth-child(7),
+.reportedTable td:nth-child(7) {
+  min-width: 50px; /* Age */
+}
+
+.reportedTable th:nth-child(8),
+.reportedTable td:nth-child(8) {
+  min-width: 100px; /* Status */
+}
+
+/* Avatar */
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: 40px; 
+  height: 40px; 
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ddd;
 }
 
-button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
+/* Tiêu đề (dùng cho User ID) */
+.titleCell {
+  color: #1e40af;
   cursor: pointer;
-  font-size: 14px;
-  margin-right: 5px;
-  transition: 0.3s;
+  max-width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-button:hover {
-  opacity: 0.8;
+/* Hover đổi màu */
+.titleCell:hover {
+  color: #2563eb;
 }
 
-button:first-child {
-  background: #28a745;
-  color: white;
+/* Không có dữ liệu */
+.noReports {
+  text-align: center;
+  padding: 1rem;
+  color: #888;
+  font-style: italic;
 }
 
-button:nth-child(2) {
-  background: #ffc107;
-  color: black;
-}
-
-button:last-child {
-  background: #dc3545;
-  color: white;
+/* Thông báo lỗi */
+.error {
+  color: #dc3545;
+  font-style: italic;
 }

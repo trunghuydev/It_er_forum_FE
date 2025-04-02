@@ -1,4 +1,4 @@
-
+/* Layout chính */
 .layoutContainer {
   display: flex;
 }
@@ -8,58 +8,104 @@
   flex: 1;
   background-color: #f4f4f4;
   min-height: 100vh;
-  margin-left: 15vw; 
-  width: calc(100% - 17vw); 
-  padding: 6rem 2rem 2rem; 
+  margin-left: 17vw;
+  width: calc(100% - 17vw);
+  padding: 9.375rem 2rem 2rem;
+  position: relative;
+  overflow: auto;
 }
 
-
-
-/*  ------------------------------------------------------------------------------------------------------  */
-
-
-/*  CSS CỦA PostDisplay  */
+/* Container cho bảng trong PostDisplay */
 .postDisplayContainer {
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
   padding: 1.5rem;
   background: white;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 700px; /* Giới hạn chiều cao của container chứa bảng */
+  overflow-y: auto; /* Thêm thanh cuộn dọc */
+  position: relative; /* Đảm bảo vị trí của header cố định */
 }
 
+/* Bảng trong PostDisplay */
 .postDisplayTable {
   width: 100%;
-  max-width: 100%; 
+  max-width: 1200px;
+  margin: 0 auto;
   border-collapse: collapse;
   background: white;
   border-radius: 0.5rem;
-  overflow: auto;
   border: 1px solid #ddd;
-  table-layout: fixed; 
+  table-layout: fixed;
 }
 
-.postDisplayTable th, .postDisplayTable td {
+.postDisplayTable th,
+.postDisplayTable td {
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  max-width: 200px; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.postDisplayTable th:last-child,
+.postDisplayTable td:last-child {
+  border-right: none;
+}
+
+/* Cố định header của bảng */
+.postDisplayTable thead {
+  background: #f4f4f4;
+  /* position: sticky;  */
+  top: 0; 
+  z-index: 999; 
+}
+
+.postDisplayTable th {
+  background: #f4f4f4; 
+  border-bottom: 2px solid #ddd;
+  font-weight: bold;
 }
 
 
+.postDisplayTable th:nth-child(1),
+.postDisplayTable td:nth-child(1) {
+  width: 15%; 
+}
 
-.postDisplayTable th:last-child, .postDisplayTable td:last-child {
-  border-right: none;
+.postDisplayTable th:nth-child(2),
+.postDisplayTable td:nth-child(2) {
+  width: 25%; 
+}
+
+.postDisplayTable th:nth-child(3),
+.postDisplayTable td:nth-child(3) {
+  width: 15%;
+}
+
+.postDisplayTable th:nth-child(4),
+.postDisplayTable td:nth-child(4) {
+  width: 10%; 
+}
+
+.postDisplayTable th:nth-child(5),
+.postDisplayTable td:nth-child(5) {
+  width: 15%; 
+}
+
+.postDisplayTable th:nth-child(6),
+.postDisplayTable td:nth-child(6) {
+  width: 20%; 
 }
 
 /* Title */
 .post_titleCell {
   color: #1e40af;
   cursor: pointer;
-  max-width: 250px; 
+  max-width: 250px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -70,10 +116,9 @@
   color: #2563eb;
 }
 
-
 /* Màu cho trạng thái Pending */
 .postStatusPending {
-  background-color: #f59e0b; 
+  background-color: #f59e0b;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   color: white;
@@ -81,4 +126,160 @@
   display: inline-block;
   min-width: 6rem;
   text-align: center;
+}
+
+/* Khi không có kết quả */
+.noResults {
+  text-align: center;
+  padding: 1rem;
+  font-style: italic;
+  color: #888;
+}
+
+/* Icon */
+.checkIcon {
+  color: green;
+}
+
+.timesIcon {
+  color: red;
+}
+
+/* Style cho PostDetail */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.postDetailWrapper {
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.postDetailContainer {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.postInfo {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.postInfo strong {
+  color: #333;
+}
+
+.postTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.postContent {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.postContent p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.postContent strong {
+  color: #333;
+}
+
+.postImage {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+
+.postImage h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.userDetail {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+
+.userDetail h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.userInfoWrapper {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.avatarSection {
+  flex: 0 0 150px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.infoSection {
+  flex: 1;
+}
+
+.infoSection p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.infoSection strong {
+  color: #333;
+}
+
+.backButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.backButton:hover {
+  background-color: #0056b3;
 }

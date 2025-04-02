@@ -33,8 +33,8 @@ const Sidebar: React.FC = () => {
         <SidebarTitle>Forum Admin</SidebarTitle>
         <TitleUnderline />
         <SidebarItem icon={<UserOutlined />} text="Post" onClick={() => navigate("/post")} />
+        <SidebarItem icon={<UserOutlined />} text="User" onClick={() => navigate("/userlist")} />
         <MenuItem onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-          
           <MenuItemContent>
             <FileTextOutlined />
             <span>Report</span>
@@ -42,25 +42,20 @@ const Sidebar: React.FC = () => {
           <DropdownIcon>{isDropdownOpen ? <UpOutlined /> : <DownOutlined />}</DropdownIcon>
         </MenuItem>
 
-        <DropdownMenu isOpen={isDropdownOpen}>
-          {/* <DropdownItem onClick={() => navigate("/post")}><Dot /> Post </DropdownItem> */}
-          <DropdownItem onClick={() => navigate("/reportedpost")}><Dot /> Post Report</DropdownItem>
-          <DropdownItem onClick={() => navigate("/userlist")}><Dot /> User</DropdownItem>
-          <DropdownItem onClick={() => navigate("/commentreport")}><Dot /> Comment report</DropdownItem>
-
-
-          {/* <DropdownItem onClick={() => navigate("/UserStatistic")}><Dot /> UserStatistic</DropdownItem>
-          <DropdownItem onClick={() => navigate("/TagStatistic")}><Dot /> TagStatistic</DropdownItem> 
-          {/* <SidebarItem icon={<UserOutlined />} text="Profile" onClick={() => navigate("/profile")} /> */}
-
-
-
+        <DropdownMenu $isOpen={isDropdownOpen}>
+          <DropdownItem onClick={() => navigate("/reportedpost")}>
+            <Dot /> Post Report
+          </DropdownItem>
+          <DropdownItem onClick={() => navigate("/rpuserlist")}>
+            <Dot /> Report User
+          </DropdownItem>
+          <DropdownItem onClick={() => navigate("/commentreport")}>
+            <Dot /> Comment report
+          </DropdownItem>
         </DropdownMenu>
-
 
         <SidebarItem icon={<LineChartOutlined />} text="Statistic" onClick={() => navigate("/statistic")} />
         <SidebarItem icon={<LogoutOutlined />} text="Logout" onClick={() => navigate("/logout")} />
-        {/* <SidebarItem icon={<UserAddOutlined />} text="Register" onClick={() => navigate("/register")} /> */}
       </Menu>
 
       <Footer>© Copyright By Trung Huy & Trung Thành</Footer>
@@ -124,7 +119,7 @@ const MenuItemContent = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-    &:hover {
+  &:hover {
     background: #fdeeee;
     color: #e57373;
   }
@@ -135,12 +130,12 @@ const DropdownIcon = styled.div`
   color: #e57373;
 `;
 
-const DropdownMenu = styled.ul<{ isOpen: boolean }>`
+const DropdownMenu = styled.ul<{ $isOpen: boolean }>`
   list-style: none;
   padding: 0;
   margin: 0;
   background: #ffffff;
-  max-height: ${({ isOpen }) => (isOpen ? "300px" : "0")};
+  max-height: ${({ $isOpen }) => ($isOpen ? "300px" : "0")};
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
 `;
@@ -177,10 +172,3 @@ const Footer = styled.div`
   background: #ffffff;
   color: #5a5a5a;
 `;
-
-
-
-
-
-
-

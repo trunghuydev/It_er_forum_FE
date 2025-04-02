@@ -1,9 +1,9 @@
-/* 📌 Container tổng */
+/*  Container tổng */
 .mainContainer {
   display: flex;
 }
 
-/* 📌 Sidebar cố định */
+/*  Sidebar cố định */
 .sidebarMenu {
   width: 250px;
   height: 100vh;
@@ -15,7 +15,7 @@
   padding-top: 20px;
 }
 
-/* 📌 Nội dung chính */
+/*  Nội dung chính */
 .container {
   flex: 1;
   margin-left: 250px;
@@ -24,36 +24,48 @@
   min-height: 100vh;
 }
 
-/* 📌 Bảng hiển thị danh sách báo cáo */
+/*  Bảng hiển thị danh sách báo cáo */
 .reportedDisplayContainer {
-  margin-top: 1.5rem;
+  margin-top: 9.5rem;
   padding: 1.5rem;
   background: white;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 700px; /* Thêm giới hạn chiều cao */
+  overflow-y: auto; /* Thêm thanh cuộn dọc */
+  overflow-x: auto; /* Thêm thanh cuộn ngang */
+  position: relative; /* Đảm bảo vị trí của header cố định */
 }
 
-/* 📌 Bảng */
+/*  Bảng */
 .reportedTable {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
   background: white;
   border-radius: 0.5rem;
-  overflow: auto;
   border: 1px solid #ddd;
-  table-layout: fixed;
+  /* Xóa table-layout: fixed để bảng tự điều chỉnh chiều rộng */
 }
 
-/*  Header cột */
+/* Cố định header của bảng */
+.reportedTable thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f3f4f6;
+}
+
+/* Header cột */
 .reportedTable th {
   padding: 1rem;
   text-align: left;
   background-color: #f3f4f6;
   border-bottom: 2px solid #ddd;
+  white-space: nowrap; /* Đảm bảo tiêu đề cột không xuống dòng */
 }
 
-/*  Các ô dữ liệu */
+/* Các ô dữ liệu */
 .reportedTable td {
   padding: 1rem;
   text-align: left;
@@ -62,19 +74,45 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.reportedTable th, 
+
+.reportedTable th,
 .reportedTable td {
-    border-right: 1px solid #ddd; /* Thêm đường kẻ dọc */
+  border-right: 1px solid #ddd; /* Thêm đường kẻ dọc */
 }
 
 /* Bỏ viền phải ở cột cuối cùng */
-.reportedTable th:last-child, 
+.reportedTable th:last-child,
 .reportedTable td:last-child {
-    border-right: none;
+  border-right: none;
 }
 
+/* Phân bổ chiều rộng cột tối thiểu */
+.reportedTable th:nth-child(1),
+.reportedTable td:nth-child(1) {
+  min-width: 150px; /* Report ID */
+}
 
-/*  Avatar */
+.reportedTable th:nth-child(2),
+.reportedTable td:nth-child(2) {
+  min-width: 250px; /* Report Title */
+}
+
+.reportedTable th:nth-child(3),
+.reportedTable td:nth-child(3) {
+  min-width: 150px; /* Reported User ID */
+}
+
+.reportedTable th:nth-child(4),
+.reportedTable td:nth-child(4) {
+  min-width: 150px; /* Reported User Name */
+}
+
+.reportedTable th:nth-child(5),
+.reportedTable td:nth-child(5) {
+  min-width: 100px; /* Avatar */
+}
+
+/* Avatar */
 .avatar {
   width: 40px;
   height: 40px;
@@ -82,7 +120,7 @@
   object-fit: cover;
 }
 
-/*  Tiêu đề báo cáo */
+/* Tiêu đề báo cáo */
 .titleCell {
   color: #1e40af;
   cursor: pointer;
@@ -97,10 +135,16 @@
   color: #2563eb;
 }
 
-/*  Không có dữ liệu */
+/* Không có dữ liệu */
 .noReports {
   text-align: center;
   padding: 1rem;
   color: #888;
+  font-style: italic;
+}
+
+/* Thông báo lỗi */
+.error {
+  color: #dc3545;
   font-style: italic;
 }

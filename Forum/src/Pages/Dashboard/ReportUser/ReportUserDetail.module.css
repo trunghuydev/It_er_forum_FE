@@ -1,0 +1,260 @@
+.mainContainer {
+  display: flex;
+  height: 100vh;
+  background-color: #f7fafc; /* Tông màu sáng, dễ chịu */
+}
+
+.container {
+  flex: 1;
+  padding: 3rem 4rem;
+  background-color: #ffffff;
+  overflow-y: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #1f2937;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.reportDetailWrapper {
+  margin-bottom: 40px;
+}
+
+.reportDetailContainer {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reportDetailContainer:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.userInfo {
+  font-size: 18px;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
+.reportTitle {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2563eb;
+}
+
+.reportContent {
+  margin-bottom: 25px;
+}
+
+.reportContent p {
+  margin: 12px 0;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.userDetail {
+  margin-top: 35px;
+}
+
+.userDetail h4 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 18px;
+  color: #1f2937;
+}
+
+.userInfoWrapper {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.avatarSection {
+  flex: 0 0 180px;
+}
+
+.avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+}
+
+.infoSection {
+  flex: 1;
+}
+
+.infoSection p {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.infoSection strong {
+  font-weight: bold;
+  color: #111827;
+}
+
+.backButton {
+  padding: 15px 30px;
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: #111827;
+  transform: scale(1.05);
+}
+
+.actionButtons {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 30px;
+}
+
+.actionButtons button {
+  flex-grow: 1;
+  padding: 15px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  font-size: 18px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Màu nút */
+.skip {
+  background-color: #9ca3af;
+}
+
+.restricted {
+  background-color: #f59e0b;
+}
+
+.banned {
+  background-color: #ef4444;
+}
+
+/* Hover cho nút */
+.skip:hover {
+  background-color: #6b7280;
+  transform: translateY(-2px);
+}
+
+.restricted:hover {
+  background-color: #d97706;
+  transform: translateY(-2px);
+}
+
+.banned:hover {
+  background-color: #b91c1c;
+  transform: translateY(-2px);
+}
+
+.noReports {
+  text-align: center;
+  padding: 1.5rem;
+  color: #888;
+  font-style: italic;
+}
+
+.error {
+  color: #dc3545;
+  font-style: italic;
+  font-size: 16px;
+}
+
+.reportedTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reportedTable thead {
+  position: sticky;
+  top: 0;
+  background-color: #f9fafb;
+  z-index: 10;
+}
+
+.reportedTable th,
+.reportedTable td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #4b5563;
+  font-size: 16px;
+}
+
+.reportedTable th {
+  font-weight: bold;
+  background-color: #f3f4f6;
+}
+
+.reportedTable th,
+.reportedTable td {
+  border-right: 1px solid #ddd;
+}
+
+.reportedTable th:last-child,
+.reportedTable td:last-child {
+  border-right: none;
+}
+
+.reportedTable td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.titleCell {
+  color: #1e40af;
+  cursor: pointer;
+  max-width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: color 0.3s ease;
+}
+
+.titleCell:hover {
+  color: #2563eb;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+}

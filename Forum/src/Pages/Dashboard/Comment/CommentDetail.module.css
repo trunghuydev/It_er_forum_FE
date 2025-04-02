@@ -1,0 +1,248 @@
+/* Layout chính */
+.mainContainer {
+    display: flex;
+  }
+  
+  .container {
+    flex: 1;
+    margin-left: 17vw;
+    padding: 6rem 1.5rem 1.5rem 1.5rem;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  /* Thông báo lỗi */
+  .error {
+    color: #dc2626;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  /* Container cho bảng trong ReportCmtDisplay */
+  .reportedDisplayContainer {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Bảng trong ReportCmtDisplay */
+  .reportedTable {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 0.5rem;
+    border: 1px solid #ddd;
+    table-layout: auto;
+  }
+  
+  .reportedTable th,
+  .reportedTable td {
+    padding: 12px 15px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-right: 1px solid #ddd;
+  }
+  
+  .reportedTable th {
+    background: #f4f4f4;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+  }
+  
+  .reportedTable td {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .reportedTable th:last-child,
+  .reportedTable td:last-child {
+    border-right: none;
+  }
+  
+  .reportedTable th:nth-child(1),
+  .reportedTable td:nth-child(1) {
+    width: 5%; /* No. */
+  }
+  
+  .reportedTable th:nth-child(2),
+  .reportedTable td:nth-child(2) {
+    width: 10%; /* Avatar */
+  }
+  
+  .reportedTable th:nth-child(3),
+  .reportedTable td:nth-child(3) {
+    width: 20%; /* User ID */
+  }
+  
+  .reportedTable th:nth-child(4),
+  .reportedTable td:nth-child(4) {
+    width: 15%; /* Reported User Name */
+  }
+  
+  .reportedTable th:nth-child(5),
+  .reportedTable td:nth-child(5) {
+    width: 10%; /* Comment Content */
+  }
+  
+  .reportedTable th:nth-child(6),
+  .reportedTable td:nth-child(6) {
+    width: 25%; /* Report Title */
+  }
+  
+  .reportedTable th:nth-child(7),
+  .reportedTable td:nth-child(7) {
+    width: 15%; /* Date Comment */
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .noReports {
+    text-align: center;
+    color: #888;
+    padding: 1rem;
+    font-style: italic;
+  }
+  
+  /* Style cho CommentDetail */
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .reportDetailWrapper {
+    margin-bottom: 20px;
+    max-width: 800px; /* Giới hạn chiều rộng để dễ đọc */
+    margin: 0 auto; /* Căn giữa */
+  }
+  
+  .reportDetailContainer {
+    background-color: #fff; /* Hộp trắng */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+  }
+  
+  .userInfo {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .userInfo strong {
+    color: #333;
+  }
+  
+  .reportTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #007bff; /* Màu xanh để nổi bật */
+  }
+  
+  .reportContent {
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .reportContent p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #444;
+  }
+  
+  .reportContent strong {
+    color: #333;
+  }
+  
+  .commentDetail {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9; /* Màu nền nhạt để phân biệt */
+    border-radius: 5px;
+    border: 1px solid #eee;
+  }
+  
+  .commentDetail h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .commentDetail p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #444;
+  }
+  
+  .commentDetail strong {
+    color: #333;
+  }
+  
+  .userDetail {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9; /* Màu nền nhạt để phân biệt */
+    border-radius: 5px;
+    border: 1px solid #eee;
+  }
+  
+  .userDetail h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .userInfoWrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Đảm bảo responsive */
+  }
+  
+  .infoSection {
+    flex: 1;
+  }
+  
+  .infoSection p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #444;
+  }
+  
+  .infoSection strong {
+    color: #333;
+  }
+  
+  .backButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .backButton:hover {
+    background-color: #0056b3;
+  }

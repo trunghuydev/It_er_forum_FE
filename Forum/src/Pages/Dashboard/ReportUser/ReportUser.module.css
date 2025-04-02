@@ -1,0 +1,95 @@
+.mainContainer {
+    display: flex;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .title {
+    margin-top:5.5rem;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .refreshButton {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .refreshButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .searchInput {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 20px;
+  }
+  
+  .userTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .userTable th,
+  .userTable td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .userTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .userTable td {
+    background-color: #fff;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .noData {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+  }
+  
+  .backButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .backButton:hover {
+    background-color: #0056b3;
+  }

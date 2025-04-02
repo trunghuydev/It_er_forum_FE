@@ -6,17 +6,23 @@ interface HeaderProps {
   searchTerm: string;
   setSearchTerm: (value: string) => void;
   pendingCount?: number;
+  totalUsersCount?: number; // Thêm prop mới
 }
 
-const Header: React.FC<HeaderProps> = ({ searchTerm, setSearchTerm, pendingCount }) => {
+const Header: React.FC<HeaderProps> = ({ searchTerm, setSearchTerm, pendingCount, totalUsersCount }) => {
   return (
     <HeaderContainer>
-      {pendingCount !== undefined && (
+      {totalUsersCount !== undefined ? (
+        <TotalUsers>
+          <span>Total Users •</span>
+          <span>{totalUsersCount}</span>
+        </TotalUsers>
+      ) : pendingCount !== undefined ? (
         <PendingApproval>
           <span>Pending Approval •</span>
           <span>{pendingCount}</span>
         </PendingApproval>
-      )}
+      ) : null}
       <SearchContainer>
         <SearchIcon />
         <SearchInput
@@ -31,6 +37,7 @@ const Header: React.FC<HeaderProps> = ({ searchTerm, setSearchTerm, pendingCount
 };
 
 export default Header;
+
 const HeaderContainer = styled.div`
   position: fixed;
   top: 0;
@@ -48,6 +55,13 @@ const HeaderContainer = styled.div`
 
 /* Pending Approval */
 const PendingApproval = styled.div`
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+`;
+
+/* Total Users */
+const TotalUsers = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;

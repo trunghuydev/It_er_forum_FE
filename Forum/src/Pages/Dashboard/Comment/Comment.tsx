@@ -2,50 +2,67 @@ import React, { useState } from "react";
 import styles from "./Comment.module.css";
 import SidebarMenu from "../../../components/SideBar/SideBarMenu";
 import Header from "../../../components/Header/Header";
-import ReportCmtDisplay from "../../../components/Comment/ReportCmtDislpay"; 
+import ReportCmtDisplay from "../../../components/Comment/ReportCmtDislpay";
+import { useFetch } from "../../../hooks/useFetch";
 
-const fakeReports = [
-  { 
-    user_id: "1",
-    user_name: "cho thanh",
-    ava_img_path: "https://i.pravatar.cc/100?img=1",
-    comment_id:"124",
-    comment_content:"Spam Comment",
-    date_comment:"2025-03-20" ,
-    replies_num: "12",
-  },
-  { 
-    user_id: "2",
-    user_name: " thanhcho",
-    ava_img_path: "https://i.pravatar.cc/100?img=1",
-    comment_id:"125",
-    comment_content:"Spam Comment",
-    date_comment:"2025-03-20" ,
-    replies_num: "13",
-  },
-  { 
-    user_id: "3",
-    user_name: "cho thanh",
-    ava_img_path: "https://i.pravatar.cc/100?img=1",
-    comment_id:"125",
-    comment_content:"Spam Comment",
-    date_comment:"2025-03-20" ,
-    replies_num: "14",
-  },
-];
+
+interface ReportedComment {
+  report_id: string;
+  reported_user_id: string;
+  reported_user_name: string;
+  report_title: string; 
+  ava_img_path: string | null;
+  comment_id?: string; 
+  comment_content?: string; 
+  date_comment?: string; 
+}
+
+
+interface ApiResponse {
+  is_success: boolean;
+  status_code: number;
+  message: string;
+  data: ReportedComment[];
+  timestamp: number;
+}
 
 const Comment: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [reports, setReports] = useState(fakeReports);
+
+  
+  const { data, loading, error, refetch } = useFetch<ApiResponse>(
+    "http://localhost:3000/api/v1/report/admin/Comment"
+  );
+
+ 
+  const reports = data?.data || [];
+
+ 
+  const filteredReports = reports.filter((report) => {
+    const userName = report.reported_user_name || ""; 
+    const commentContent = report.comment_content || ""; 
+    return (
+      userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      commentContent.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
   return (
     <div className={styles.mainContainer}>
       <SidebarMenu />
       <div className={styles.container}>
-        <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} pendingCount={reports.length} />
+        <Header
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          pendingCount={reports.length}
+        />
 
-       
-        <ReportCmtDisplay reports={reports} />
+        {/* Trạng thái fetch */}
+        {loading && <p>Loading comments...</p>}
+        {error && <p className={styles.error}>Error: {error}</p>}
+
+        {/* Hiển thị danh sách bình luận bị báo cáo */}
+        {!loading && !error && <ReportCmtDisplay reports={filteredReports} />}
       </div>
     </div>
   );

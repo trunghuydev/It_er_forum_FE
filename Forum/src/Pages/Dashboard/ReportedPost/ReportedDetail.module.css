@@ -1,70 +1,100 @@
-
-.reportDetailWrapper {
+/* Container tổng */
+.mainContainer {
+    display: flex;
+  }
+  
+  /* Nội dung chính */
+  .container {
+    flex: 1;
+    margin-left: 250px;
+    padding: 4rem 3rem;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+  }
+  
+  /* Wrapper bọc ReportDetail */
+  .reportDetailWrapper {
     display: flex;
     justify-content: center;
     width: 100%;
-    /* padding-left : 20vw; */
-}
-
-
-.reportDetailContainer {
+  }
+  
+  /* ReportDetail */
+  .reportDetailContainer {
+    margin-top: 13rem;
     background: white;
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 70vw;
-    margin-left: 17vw;
-}
-
-.userinfo {
+    margin-left: 4vw;
+  }
+  
+  /* Thông tin User */
+  .userInfo {
     display: flex;
     align-items: center;
-    gap: 1rem; 
-}
-
-.userName {
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start; 
-    justify-content: center;
+    gap: 1rem;
     border-bottom: 1px solid #ddd;
     padding-bottom: 1rem;
-}
-
-
-.reportTitle {
+  }
+  
+  /* Tiêu đề báo cáo */
+  .reportTitle {
     font-size: 1.5rem;
     font-weight: bold;
     color: #1e293b;
     margin-top: 1rem;
-}
-
-
-.reportContent {
+  }
+  
+  /* Nội dung báo cáo */
+  .reportContent {
     background: white;
     padding: 1.5rem;
     border-radius: 0.5rem;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 1.5rem;
-}
-
-.statusActions {
+  }
+  
+  /* Chi tiết bài viết bị báo cáo */
+  .postDetail {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+  }
+  
+  .postTitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+  }
+  
+  .postContent {
+    margin-bottom: 1rem;
+  }
+  
+  /* Trạng thái & Nút hành động */
+  .statusActions {
     width: 100%;
     background: white;
     padding: 1.5rem;
     border-radius: 0.5rem;
     margin-top: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-.actionButtons {
+  }
+  
+  /* Nút hành động */
+  .actionButtons {
     display: flex;
     gap: 0.75rem;
-}
-
-.actionButtons button {
+  }
+  
+  .actionButtons button {
     flex-grow: 1;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -73,18 +103,51 @@
     font-weight: bold;
     color: white;
     font-size: 1rem;
-}
-
-
-
-.skip { background-color: #6b7280; } 
-.restricted { background-color: #eab308; } 
-.banned { background-color: #dc2626; } 
-
-
-.skip:hover { background-color: #4b5563; }
-.restricted:hover { background-color: #d97706; }
-.banned:hover { background-color: #b91c1c; }
-
-
-
+  }
+  
+  /* Màu nút */
+  .skip {
+    background-color: #6b7280;
+  }
+  
+  .restricted {
+    background-color: #eab308;
+  }
+  
+  .banned {
+    background-color: #dc2626;
+  }
+  
+  /* Hover cho nút */
+  .skip:hover {
+    background-color: #4b5563;
+  }
+  
+  .restricted:hover {
+    background-color: #d97706;
+  }
+  
+  .banned:hover {
+    background-color: #b91c1c;
+  }
+  
+  /* Trạng thái */
+  .status-pending {
+    color: #f59e0b;
+    font-weight: bold;
+  }
+  
+  .status-skipped {
+    color: #6b7280;
+    font-weight: bold;
+  }
+  
+  .status-restricted {
+    color: #eab308;
+    font-weight: bold;
+  }
+  
+  .status-banned {
+    color: #dc2626;
+    font-weight: bold;
+  }

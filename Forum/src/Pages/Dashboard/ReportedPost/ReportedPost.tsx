@@ -1,63 +1,68 @@
 import React, { useState } from "react";
 import styles from "./ReportedPost.module.css";
 import SidebarMenu from "../../../components/SideBar/SideBarMenu";
-import { useNavigate } from "react-router-dom";
-import ReportedDisplay from "../../../components/ReportedPost/ReportedDisplay"; 
-import Header from "../../../components/Header/Header"; 
+import ReportedDisplay from "../../../components/ReportedPost/ReportedDisplay";
+import Header from "../../../components/Header/Header";
+import { useFetch } from "../../../hooks/useFetch";
 
+// Interface cho báo cáo
 interface Report {
-  reported_id: string;
-  user_name: string;
-  ava_img_path: string;
+  report_id: string;
+  reported_user_id: string;
+  reported_user_name: string;
   report_title: string;
-  date_reported: string;
+  ava_img_path: string | null;
 }
 
-
-const fakeReports: Report[] = [
-  {
-    reported_id: "1",
-    user_name: "JohnDoe",
-    ava_img_path: "https://i.pravatar.cc/100?img=1",
-    report_title: "Spam in forum",
-    date_reported: "2025-03-20",
-  },
-  {
-    reported_id: "2",
-    user_name: "AliceSmith",
-    ava_img_path: "https://i.pravatar.cc/100?img=2",
-    report_title: "Hate speech detected",
-    date_reported: "2025-03-18",
-  },
-  {
-    reported_id: "3",
-    user_name: "DavidBrown",
-    ava_img_path: "https://i.pravatar.cc/100?img=3",
-    report_title: "Misinformation spreading",
-    date_reported: "2025-03-15",
-  },
-];
+interface ApiResponse {
+  is_success: boolean;
+  status_code: number;
+  message: string;
+  data: Report[];
+  timestamp: number;
+}
 
 const ReportedPost: React.FC = () => {
-  const [reports, setReports] = useState<Report[]>(fakeReports);
   const [searchTerm, setSearchTerm] = useState("");
 
-  
-  const filteredReports = reports.filter(
-    (report) =>
-      report.user_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      report.report_title.toLowerCase().includes(searchTerm.toLowerCase())
+  // Giả định accessToken được lưu trong localStorage
+  const accessToken = localStorage.getItem("accessToken") || "your-token-here";
+
+  // Fetch danh sách báo cáo từ API
+  const { data, loading, error, refetch } = useFetch<ApiResponse>(
+    "http://localhost:3000/api/v1/report/admin/Post",
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
   );
+
+  // Lấy danh sách báo cáo từ dữ liệu API, mặc định là mảng rỗng nếu chưa có dữ liệu
+  const reports = data?.data || [];
+
+  // Lọc báo cáo dựa trên searchTerm, kiểm tra an toàn trước khi gọi toLowerCase
+  const filteredReports = reports.filter((report) => {
+    const userName = report.reported_user_name || "";
+    const reportTitle = report.report_title || "";
+    return (
+      userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      reportTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
   return (
     <div className={styles.mainContainer}>
       <SidebarMenu />
       <div className={styles.container}>
-        {/* Header được tái sử dụng */}
-        <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} pendingCount={reports.length} />
-
-        {/* Component hiển thị danh sách bài bị báo cáo */}
-        <ReportedDisplay reports={filteredReports} />
+        <Header
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          pendingCount={reports.length}
+        />
+        {loading && <p>Loading reports...</p>}
+        {error && <p className={styles.error}>Error: {error}</p>}
+        {!loading && !error && <ReportedDisplay reports={filteredReports} />}
       </div>
     </div>
   );
