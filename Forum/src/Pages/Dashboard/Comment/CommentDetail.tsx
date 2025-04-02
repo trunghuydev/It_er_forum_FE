@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./CommentDetail.module.css";
 import SidebarMenu from "../../../components/SideBar/SideBarMenu";
 import { useFetch } from "../../../hooks/useFetch";
+import axios from "axios";
 
 // Định nghĩa interface cho dữ liệu báo cáo
 interface CommentContent {
@@ -19,6 +20,7 @@ interface Report {
   subject: string;
   date_reported: string;
   content: CommentContent;
+  status?: string;
 }
 
 interface ApiResponse {
@@ -57,6 +59,29 @@ const CommentDetail: React.FC = () => {
   );
 
   const report = data?.data;
+  const [status, setStatus] = useState<string>(report?.status || "Pending");
+
+  // Xử lý cập nhật trạng thái
+  const handleAction = async (newStatus: "Skipped" | "Restricted" | "Banned") => {
+    try {
+      if (newStatus === "Skipped") {
+        await axios.delete(
+          `http://localhost:3000/api/v1/report/skip-report/${reported_id}`,
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+      } else {
+        await axios.patch(
+          `http://localhost:3000/api/v1/users/admin/${report?.reported_user_id}`,
+          { status: newStatus },
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+      }
+      setStatus(newStatus);
+      setTimeout(() => navigate("/commentreport"), 500);
+    } catch (err) {
+      console.error("Failed to update status:", err);
+    }
+  };
 
   // Xử lý trạng thái loading
   if (loading) {
@@ -117,8 +142,22 @@ const CommentDetail: React.FC = () => {
                 <div className={styles.infoSection}>
                   <p><strong>User ID:</strong> {report.reported_user_id}</p>
                   <p><strong>Username:</strong> {report.reported_user_name}</p>
+                  <p><strong>Status:</strong> {status}</p>
                 </div>
               </div>
+            </div>
+
+            {/* Nút hành động */}
+            <div className={styles.actionButtons}>
+              <button className={`${styles.actionButton} ${styles.skip}`} onClick={() => handleAction("Skipped")}>
+                Skip
+              </button>
+              <button className={`${styles.actionButton} ${styles.restricted}`} onClick={() => handleAction("Restricted")}>
+                Restrict
+              </button>
+              <button className={`${styles.actionButton} ${styles.banned}`} onClick={() => handleAction("Banned")}>
+                Ban
+              </button>
             </div>
           </div>
         </div>

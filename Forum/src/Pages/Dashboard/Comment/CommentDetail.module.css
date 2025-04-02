@@ -1,248 +1,241 @@
 /* Layout chính */
 .mainContainer {
-    display: flex;
-  }
-  
-  .container {
-    flex: 1;
-    margin-left: 17vw;
-    padding: 6rem 1.5rem 1.5rem 1.5rem;
-    background-color: #f4f4f4;
-    min-height: 100vh;
-    box-sizing: border-box;
-  }
-  
-  /* Thông báo lỗi */
-  .error {
-    color: #dc2626;
-    text-align: center;
-    padding: 1rem;
-  }
-  
-  /* Container cho bảng trong ReportCmtDisplay */
-  .reportedDisplayContainer {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  /* Bảng trong ReportCmtDisplay */
-  .reportedTable {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 0.5rem;
-    border: 1px solid #ddd;
-    table-layout: auto;
-  }
-  
-  .reportedTable th,
-  .reportedTable td {
-    padding: 12px 15px;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    border-right: 1px solid #ddd;
-  }
-  
-  .reportedTable th {
-    background: #f4f4f4;
-    border-bottom: 2px solid #ddd;
-    font-weight: bold;
-  }
-  
-  .reportedTable td {
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .reportedTable th:last-child,
-  .reportedTable td:last-child {
-    border-right: none;
-  }
-  
-  .reportedTable th:nth-child(1),
-  .reportedTable td:nth-child(1) {
-    width: 5%; /* No. */
-  }
-  
-  .reportedTable th:nth-child(2),
-  .reportedTable td:nth-child(2) {
-    width: 10%; /* Avatar */
-  }
-  
-  .reportedTable th:nth-child(3),
-  .reportedTable td:nth-child(3) {
-    width: 20%; /* User ID */
-  }
-  
-  .reportedTable th:nth-child(4),
-  .reportedTable td:nth-child(4) {
-    width: 15%; /* Reported User Name */
-  }
-  
-  .reportedTable th:nth-child(5),
-  .reportedTable td:nth-child(5) {
-    width: 10%; /* Comment Content */
-  }
-  
-  .reportedTable th:nth-child(6),
-  .reportedTable td:nth-child(6) {
-    width: 25%; /* Report Title */
-  }
-  
-  .reportedTable th:nth-child(7),
-  .reportedTable td:nth-child(7) {
-    width: 15%; /* Date Comment */
-  }
-  
-  .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .noReports {
-    text-align: center;
-    color: #888;
-    padding: 1rem;
-    font-style: italic;
-  }
-  
-  /* Style cho CommentDetail */
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .reportDetailWrapper {
-    margin-bottom: 20px;
-    max-width: 800px; /* Giới hạn chiều rộng để dễ đọc */
-    margin: 0 auto; /* Căn giữa */
-  }
-  
-  .reportDetailContainer {
-    background-color: #fff; /* Hộp trắng */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ddd;
-  }
-  
-  .userInfo {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #555;
-  }
-  
-  .userInfo strong {
-    color: #333;
-  }
-  
-  .reportTitle {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #007bff; /* Màu xanh để nổi bật */
-  }
-  
-  .reportContent {
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  
-  .reportContent p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #444;
-  }
-  
-  .reportContent strong {
-    color: #333;
-  }
-  
-  .commentDetail {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f9f9f9; /* Màu nền nhạt để phân biệt */
-    border-radius: 5px;
-    border: 1px solid #eee;
-  }
-  
-  .commentDetail h4 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .commentDetail p {
-    font-size: 16px;
-    margin: 5px 0;
-    color: #444;
-  }
-  
-  .commentDetail strong {
-    color: #333;
-  }
-  
-  .userDetail {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f9f9f9; /* Màu nền nhạt để phân biệt */
-    border-radius: 5px;
-    border: 1px solid #eee;
-  }
-  
-  .userDetail h4 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .userInfoWrapper {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap; /* Đảm bảo responsive */
-  }
-  
-  .infoSection {
-    flex: 1;
-  }
-  
-  .infoSection p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #444;
-  }
-  
-  .infoSection strong {
-    color: #333;
-  }
-  
-  .backButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
-  
-  .backButton:hover {
-    background-color: #0056b3;
-  }
+  display: flex;
+  height: 100vh;
+  background-color: #f3f4f6;
+}
+
+.container {
+  flex: 1;
+  margin-left: 17vw;
+  padding: 6rem 2rem;
+  background-color: #ffffff;
+  min-height: 100vh;
+  box-sizing: border-box;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Thông báo lỗi */
+.error {
+  color: #dc2626;
+  text-align: center;
+  padding: 1rem;
+  font-weight: bold;
+  background: #fee2e2;
+  border-radius: 8px;
+}
+
+/* Bảng Report */
+.reportedDisplayContainer {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.reportedTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  table-layout: auto;
+}
+
+.reportedTable th,
+.reportedTable td {
+  padding: 14px 18px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 1px solid #ddd;
+}
+
+.reportedTable th {
+  background: #f8fafc;
+  font-weight: bold;
+  color: #374151;
+  border-bottom: 2px solid #ddd;
+}
+
+.reportedTable td {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  color: #4b5563;
+}
+
+.reportedTable th:last-child,
+.reportedTable td:last-child {
+  border-right: none;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+  transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+}
+
+/* Trạng thái không có báo cáo */
+.noReports {
+  text-align: center;
+  color: #6b7280;
+  padding: 1.5rem;
+  font-style: italic;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+/* Chi tiết báo cáo */
+.reportDetailWrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.reportDetailContainer {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #1f2937;
+  text-transform: uppercase;
+}
+
+.reportTitle {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #2563eb;
+}
+
+.reportContent {
+  line-height: 1.7;
+  font-size: 16px;
+  color: #374151;
+}
+
+.commentDetail {
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #2563eb;
+  margin-bottom: 20px;
+}
+
+.commentDetail h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+/* Thông tin người dùng */
+.userDetail {
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.userDetail h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.userInfoWrapper {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.infoSection {
+  flex: 1;
+}
+
+.infoSection p {
+  font-size: 16px;
+  color: #4b5563;
+}
+
+/* Nút bấm */
+.backButton {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.backButton:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Các nút hành động */
+.actionButtons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.actionButtons button {
+  flex-grow: 1;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  font-size: 1rem;
+}
+
+/* Màu nút */
+.skip {
+  background-color: #6b7280;
+}
+
+.restricted {
+  background-color: #eab308;
+}
+
+.banned {
+  background-color: #dc2626;
+}
+
+/* Hover cho nút */
+.skip:hover {
+  background-color: #4b5563;
+}
+
+.restricted:hover {
+  background-color: #d97706;
+}
+
+.banned:hover {
+  background-color: #b91c1c;
+}

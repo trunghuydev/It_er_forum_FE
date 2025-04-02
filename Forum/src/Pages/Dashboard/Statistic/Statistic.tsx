@@ -43,6 +43,7 @@ const Statistic: React.FC<StatisticProps> = () => {
     labels: Array.from({ length: 24 }, (_, i) => i.toString()), 
     datasets: [],
   });
+
   const [isConnected, setIsConnected] = useState(false);
   const [combinedData, setCombinedData] = useState<TimeTagData[]>(() => {
     try {
@@ -68,7 +69,9 @@ const Statistic: React.FC<StatisticProps> = () => {
     }
   });
 
-  // Lưu combinedData vào localStorage 
+
+
+  // Lưu combinedData  
   useEffect(() => {
     try {
       localStorage.setItem('combinedData', JSON.stringify(combinedData));
@@ -96,11 +99,11 @@ const Statistic: React.FC<StatisticProps> = () => {
           }
         });
 
-        // Tạo dataset cho từng tagName
+        
         allTagNames.forEach((tagName, index) => {
           const data = Array(24).fill(0); 
 
-          // Chỉ điền dữ liệu tại các giờ có trong initialData
+          
           initialData.forEach(entry => {
             if (entry.tags && entry.tags[tagName] !== undefined) {
               data[entry.hour] = entry.tags[tagName];
@@ -134,9 +137,9 @@ const Statistic: React.FC<StatisticProps> = () => {
         datasets: [],
       });
     }
-  }, []); // Chỉ chạy khi component được mount
+  }, []); 
 
-  // Hàm xóa dữ liệu trong localStorage và làm mới trạng thái
+  // Hàm xóa dữ liệu trong localStorage 
   const clearLocalStorage = () => {
     try {
       localStorage.removeItem('combinedData');

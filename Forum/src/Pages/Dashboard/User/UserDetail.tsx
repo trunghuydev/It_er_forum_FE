@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./UserDetail.module.css";
 import SidebarMenu from "../../../components/SideBar/SideBarMenu";
@@ -44,8 +44,8 @@ const UserDetail: React.FC = () => {
   }
 
   // Fetch dữ liệu từ API
-  const { data, loading, error } = useFetch<ApiResponse>(
-    `http://localhost:3000/api/v1/users/user-detail/${user_id}`, // Cập nhật URL API
+  const { data, loading, error, refetch } = useFetch<ApiResponse>(
+    `http://localhost:3000/api/v1/users/user-detail/${user_id}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken") || "your-token-here"}`,
@@ -54,6 +54,34 @@ const UserDetail: React.FC = () => {
   );
 
   const user = data?.data;
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  // Hàm cập nhật trạng thái user
+  const handleUpdateStatus = async () => {
+    if (!user) return;
+
+    setIsUpdating(true);
+    try {
+      const response = await fetch(`http://localhost:3000/api/v1/users/admin/${user.user_id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("accessToken") || "your-token-here"}`,
+        },
+        body: JSON.stringify({ status: user.status === "Active" ? "Banned" : "Active" }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update user status");
+      }
+
+      await refetch(); // Load lại dữ liệu sau khi cập nhật thành công
+    } catch (error) {
+      console.error("Error updating user status:", error);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -103,6 +131,19 @@ const UserDetail: React.FC = () => {
             <p><strong>Phone:</strong> {user.phone_num || "N/A"}</p>
             <p><strong>Age:</strong> {user.age !== null ? user.age : "N/A"}</p>
             <p><strong>Status:</strong> {user.status}</p>
+
+            {/* Nút cập nhật trạng thái */}
+            <button
+              className={styles.updateButton}
+              onClick={handleUpdateStatus}
+              disabled={isUpdating}
+            >
+              {isUpdating
+                ? "Updating..."
+                : user.status === "Active"
+                ? "Deactivate Account"
+                : "Activate Account"}
+            </button>
           </div>
         </div>
       </div>
