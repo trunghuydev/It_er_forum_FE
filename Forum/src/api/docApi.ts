@@ -13,7 +13,6 @@ export const DocApi = {
         const url = `/posts/admin/dashboard/${post_id}`
         const res = await axiosClient.get(url)
         return res.data
-
     },
 
     getAllReportPost: async (): Promise<TPost<TReportPostResponse[]>> => {

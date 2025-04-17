@@ -1,3 +1,4 @@
+//* React Query  */
 export const QueryKeys = {
     COMMENT: 'COMMENT',
     COMMENT_DETAIL: 'COMMENT_DETAIL',
