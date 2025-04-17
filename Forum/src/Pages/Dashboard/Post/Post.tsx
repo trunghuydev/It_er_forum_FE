@@ -1,79 +1,99 @@
-  import React, { useState, useEffect } from "react";
-  import styles from "./Post.module.css";
-  import SidebarMenu from "../../../components/SideBar/SideBarMenu";
-  import PostDisplay from "../../../components/Post/PostDisplay";
-  import Header from "../../../components/Header/Header";
-  import { useFetch } from "../../../hooks/useFetch";
+import React, { useState, useEffect } from "react";
+import styles from "./Post.module.css";
+import SidebarMenu from "../../../components/SideBar/SideBarMenu";
+import Header from "../../../components/Header/Header";
+import { usePost } from "../../../hooks/Post/usePost";
+import { useNavigate } from "react-router-dom";
+import { FaCheck, FaTimes } from "react-icons/fa";
+import { TDocsPost } from "@/constants";
 
-  interface Post {
-    user_id: string;
-    user_name: string;
-    is_image: boolean;
-    ava_img_path: string | null;
-    post_title: string;
-    date_updated: string;
-    status: "Pending" | "Approved" | "Rejected";
-    post_id: string;
-  }
+const Post: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [pendingCount, setPendingCount] = useState(0);
+  const navigate = useNavigate();
+  const { data, isLoading, isError } = usePost();
+  const posts: TDocsPost[] = data?.data || [];
+  const filteredPosts = posts.filter(
+    (data) =>
+      data.post_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      data.user_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  interface ApiResponse {
-    is_success: boolean;
-    status_code: number;
-    message: string;
-    data: Post[];
-    timestamp: number;
-  }
+  useEffect(() => {
+    if (posts.length) {
+      const pendingPosts = posts.filter((post) => post.status === "Pending").length;
+      setPendingCount(pendingPosts);
+    }
+  }, [posts]);
 
-  const Post: React.FC = () => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [pendingCount, setPendingCount] = useState(0);
 
-    // Fetch dữ liệu từ API
-    const { data, loading, error, refetch } = useFetch<ApiResponse>(
-      "http://localhost:3000/api/v1/posts/admin/dashboard"
-    );
 
-    //  pendingCount với dữ liệu API
-    useEffect(() => {
-      if (data?.data) {
-        const pendingPosts = data.data.filter((post) => post.status === "Pending").length;
-        setPendingCount(pendingPosts);
-      }
-    }, [data]);
+  return (
+    <div className={styles.layoutContainer}>
+      <SidebarMenu />
+      <div className={styles.postContainer}>
+        <Header
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          pendingCount={pendingCount}
+        />
 
-    // Lấy danh sách bài đăng từ API
-    const posts = data?.data || [];
+        {isLoading && <p>Loading posts...</p>}
+        {isError && <p className={styles.error}>Error loading posts.</p>}
 
-    return (
-      <div className={styles.layoutContainer}>
-        {/* Sidebar */}
-        <SidebarMenu />
-
-        {/* Nội dung chính */}
-        <div className={styles.postContainer}>
-          {/* Header */}
-          <Header
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            pendingCount={pendingCount}
-          />
-          
-          {/* Trạng thái fetch */}
-          {loading && <p>Loading posts...</p>}
-          {error && <p className={styles.error}>Error: {error}</p>}
-
-          {/* Nội dung bài post */}
-          {!loading && !error && <PostDisplay searchTerm={searchTerm} posts={posts} />}
-        </div>
+        {!isLoading && !isError && (
+          <div className={styles.postDisplayContainer}>
+            <h2>Posts</h2>
+            <table className={styles.postDisplayTable}>
+              <thead>
+                <tr>
+                  <th>Post ID</th>
+                  <th>Post Title</th>
+                  <th>User Name</th>
+                  <th>Have Image</th>
+                  <th>Date Updated</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredPosts.length > 0 ? (
+                  filteredPosts.map((data) => (
+                    <tr key={data.post_id}>
+                      <td>{data.post_id}</td>
+                      <td
+                        className={styles.post_titleCell}
+                        onClick={() => navigate(`/postdetail/${data.post_id}`)}
+                      >
+                        {data.post_title}
+                      </td>
+                      <td>{data.user_name}</td>
+                      <td className={styles.ava_img_pathCell}>
+                        {data.is_image ? (
+                          <FaCheck className={styles.checkIcon} />
+                        ) : (
+                          <FaTimes className={styles.timesIcon} />
+                        )}
+                      </td>
+                      <td>{new Date(data.date_updated).toLocaleDateString()}</td>
+                      <td className={styles.postStatusCell}>
+                        <span className={styles.postStatusPending}>{data.status}</span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={6} className={styles.noResults}>
+                      No matching results
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-  export default Post;
-
-
-
-
-
-
-
+export default Post;

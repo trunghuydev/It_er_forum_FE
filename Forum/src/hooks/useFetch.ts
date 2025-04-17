@@ -17,7 +17,7 @@ const refreshAccessToken = async () => {
       { headers: { "Content-Type": "application/json" } }
     );
 
-    // Giả định response có cấu trúc tương tự /auth/login
+    
     const { access_token, refresh_token } = response.data.data;
     if (!access_token) throw new Error("No access token in refresh response");
 

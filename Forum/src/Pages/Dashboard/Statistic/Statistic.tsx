@@ -14,8 +14,8 @@ import {
   ChartData,
   ChartOptions
 } from 'chart.js';
-import io, { Socket } from 'socket.io-client';
-import UserGrowthBarChart from "./UserGrowthBarChart"; 
+import io, { Socket } from 'socket.io-client'
+import UserGrowthBarChart from "./UserGrowthBarChart"
 
 ChartJS.register(
   CategoryScale,
@@ -27,7 +27,7 @@ ChartJS.register(
   Legend
 );
 
-interface StatisticProps {}
+interface StatisticProps { }
 
 interface TimeTagData {
   day: string;
@@ -38,13 +38,16 @@ interface TimeTagData {
 const Statistic: React.FC<StatisticProps> = () => {
   const navigate = useNavigate();
   const socketRef = useRef<Socket | null>(null);
-  
+
+
   const [chartData, setChartData] = useState<ChartData<"line">>({
-    labels: Array.from({ length: 24 }, (_, i) => i.toString()), 
+    labels: Array.from({ length: 24 }, (_, i) => i.toString()),
     datasets: [],
   });
 
   const [isConnected, setIsConnected] = useState(false);
+
+
   const [combinedData, setCombinedData] = useState<TimeTagData[]>(() => {
     try {
       const savedData = localStorage.getItem('combinedData');
@@ -54,6 +57,8 @@ const Statistic: React.FC<StatisticProps> = () => {
       return [];
     }
   });
+
+
   const [currentHour, setCurrentHour] = useState<number>(() => {
     try {
       const savedData = localStorage.getItem('combinedData');
@@ -71,7 +76,7 @@ const Statistic: React.FC<StatisticProps> = () => {
 
 
 
-  // Lưu combinedData  
+
   useEffect(() => {
     try {
       localStorage.setItem('combinedData', JSON.stringify(combinedData));
@@ -81,7 +86,7 @@ const Statistic: React.FC<StatisticProps> = () => {
     }
   }, [combinedData]);
 
-  //  đồ từ dữ liệu trong localStorage
+
   useEffect(() => {
     try {
       const savedData = localStorage.getItem('combinedData');
@@ -92,18 +97,18 @@ const Statistic: React.FC<StatisticProps> = () => {
         const newDatasets: any[] = [];
         const allTagNames = new Set<string>();
 
-       
+
         initialData.forEach(entry => {
           if (entry.tags && typeof entry.tags === 'object') {
             Object.keys(entry.tags).forEach(tagName => allTagNames.add(tagName));
           }
         });
 
-        
-        allTagNames.forEach((tagName, index) => {
-          const data = Array(24).fill(0); 
 
-          
+        allTagNames.forEach((tagName, index) => {
+          const data = Array(24).fill(0);
+
+
           initialData.forEach(entry => {
             if (entry.tags && entry.tags[tagName] !== undefined) {
               data[entry.hour] = entry.tags[tagName];
@@ -137,13 +142,13 @@ const Statistic: React.FC<StatisticProps> = () => {
         datasets: [],
       });
     }
-  }, []); 
+  }, []);
 
-  // Hàm xóa dữ liệu trong localStorage 
+
   const clearLocalStorage = () => {
     try {
       localStorage.removeItem('combinedData');
-      localStorage.removeItem('userGrowthData'); 
+      localStorage.removeItem('userGrowthData');
       setCombinedData([]);
       setChartData({ labels: chartData.labels, datasets: [] });
       setCurrentHour(0);
@@ -194,16 +199,16 @@ const Statistic: React.FC<StatisticProps> = () => {
       return updatedData;
     });
 
-    // Cập nhật dữ liệu biểu đồ
+
     setChartData(prevData => {
       const newDatasets = Object.keys(tagData).map((tagName, index) => {
         const existingDataset = prevData.datasets.find(ds => ds.label === tagName);
-        
-        const newData = existingDataset 
+
+        const newData = existingDataset
           ? [...existingDataset.data]
           : Array(24).fill(0);
-        
-        // Chỉ cập nhật dữ liệu tại currentHour
+
+
         if (currentHour >= 0 && currentHour < newData.length) {
           newData[currentHour] = tagData[tagName];
         } else {
@@ -240,7 +245,7 @@ const Statistic: React.FC<StatisticProps> = () => {
 
     socketRef.current.on('connect', () => {
       console.log('Socket.IO connected to http://localhost:3000');
-      setIsConnected(true);
+
     });
 
     socketRef.current.on('message', (data) => {
@@ -249,7 +254,7 @@ const Statistic: React.FC<StatisticProps> = () => {
 
     socketRef.current.on('tagGrowth', (tagData: { [tagName: string]: number }) => {
       console.log('Received tagGrowth event:', tagData);
-      
+
       if (!tagData || typeof tagData !== 'object') {
         console.error('Invalid tagData received:', tagData);
         return;
@@ -287,11 +292,11 @@ const Statistic: React.FC<StatisticProps> = () => {
       setChartData(prevData => {
         const newDatasets = Object.keys(tagData).map((tagName, index) => {
           const existingDataset = prevData.datasets.find(ds => ds.label === tagName);
-          
-          const newData = existingDataset 
+
+          const newData = existingDataset
             ? [...existingDataset.data]
             : Array(24).fill(0);
-          
+
           // Chỉ cập nhật dữ liệu tại currentHour
           if (currentHour >= 0 && currentHour < newData.length) {
             newData[currentHour] = tagData[tagName];
@@ -373,7 +378,7 @@ const Statistic: React.FC<StatisticProps> = () => {
       title: { display: true, text: 'Tag Growth Statistics' },
     },
     scales: {
-      x: { 
+      x: {
         title: { display: true, text: 'Hours' },
         type: 'category',
         ticks: {
@@ -382,7 +387,7 @@ const Statistic: React.FC<StatisticProps> = () => {
           minRotation: 0,
         },
       },
-      y: { 
+      y: {
         title: { display: true, text: 'Growth (%)' },
         type: 'linear',
         beginAtZero: true,
@@ -393,39 +398,39 @@ const Statistic: React.FC<StatisticProps> = () => {
   return (
     <div style={{ display: 'flex' }}>
       <SidebarMenu />
-      <div style={{ flex: 1, padding: '20px',marginTop:'24rem', width:'80vw', marginLeft:'20rem' }}>
+      <div style={{ flex: 1, padding: '20px', marginTop: '24rem', width: '80vw', marginLeft: '20rem' }}>
         <h1>WELCOME TO STATISTIC PAGE</h1>
         <div>Socket Status: {isConnected ? 'Connected' : 'Disconnected'}</div>
-        <button 
-          onClick={clearLocalStorage} 
-          style={{ 
-            margin: '10px 0', 
-            padding: '10px 20px', 
-            backgroundColor: '#ff4d4f', 
-            color: 'white', 
-            border: 'none', 
-            borderRadius: '5px', 
-            cursor: 'pointer' 
+        <button
+          onClick={clearLocalStorage}
+          style={{
+            margin: '10px 0',
+            padding: '10px 20px',
+            backgroundColor: '#ff4d4f',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer'
           }}
         >
           Clear Data
         </button>
-        <button 
-          onClick={simulateHourIncrease} 
-          style={{ 
-            margin: '10px', 
-            padding: '10px 20px', 
-            backgroundColor: '#1890ff', 
-            color: 'white', 
-            border: 'none', 
-            borderRadius: '5px', 
-            cursor: 'pointer' 
+        <button
+          onClick={simulateHourIncrease}
+          style={{
+            margin: '10px',
+            padding: '10px 20px',
+            backgroundColor: '#1890ff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer'
           }}
         >
           Simulate Hour Increase
         </button>
-        <div style={{ 
-          maxWidth: '800px', 
+        <div style={{
+          maxWidth: '800px',
           margin: '20px auto',
           padding: '20px',
           boxShadow: '0 0 10px rgba(0,0,0,0.1)',
@@ -433,7 +438,7 @@ const Statistic: React.FC<StatisticProps> = () => {
         }}>
           <Line data={chartData} options={options} />
         </div>
-        {/* Thêm biểu đồ cột UserGrowthBarChart */}
+
         <UserGrowthBarChart />
       </div>
     </div>

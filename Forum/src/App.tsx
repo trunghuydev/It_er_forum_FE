@@ -9,7 +9,7 @@ import Comment from "./Pages/Dashboard/Comment/Comment";
 import UserList from './Pages/Dashboard/User/UserList';
 import Logout from './Pages/Login/Logout';
 import Statistic from './Pages/Dashboard/Statistic/Statistic';
-import PostDetail from './Pages/Dashboard/Post/PostDetail';
+import PostDetail from './Pages/Dashboard/Post/Detail/PostDetail';
 import Post from './Pages/Dashboard/Post/Post';
 import ReportDetail from './Pages/Dashboard/ReportedPost/ReportedDetail';
 import UserDetail from './Pages/Dashboard/User/UserDetail';
@@ -32,15 +32,15 @@ export const App: React.FC = () => {
         <Route path="/report/:report_id" element={<ReportDetail />} />
         <Route path="/commentreport" element={<Comment />} />
         <Route path="/report-comment/:reported_id" element={<CommentDetail />} />
-       
+
         <Route path="/userlist" element={<UserList />} />
         <Route path="/user/:user_id" element={<UserDetail />} />
         <Route path="/rpuserlist" element={<RpUserList />} />
         <Route path="/report-user/:report_id" element={<ReportUserDetail />} />
         <Route path="/statistic" element={<Statistic />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/postdetail/:id" element={<PostDetail />} />
-       
+        <Route path="/postdetail/:post_id" element={<PostDetail />} />
+
         {/* <Route path="/register" element={<RegisterForm />} /> 
          <Route path="/profile" element={<Profile />} />
         */}
@@ -49,10 +49,10 @@ export const App: React.FC = () => {
     </Router>
 
 
-    
+
   );
-  
+
 };
 
-export default  App;
+export default App;
 

@@ -1,59 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./PostDetail.module.css";
-import SidebarMenu from "../../../components/SideBar/SideBarMenu";
-import { useFetch } from "../../../hooks/useFetch";
+import SidebarMenu from "../../../../components/SideBar/SideBarMenu";
 import axios from "axios";
-import ImageSlider from "../../../components/ImageSlide/ImageSlide";
+import ImageSlider from "../../../../components/ImageSlide/ImageSlide";
+import { usePostDetail } from "../../../../hooks/Post/usePostDetail";
 
-// Interface cho chi tiết bài đăng
-interface PostDetail {
-  post_id: string;
-  post_title: string;
-  user_name: string;
-  user_id: string;
-  ava_img_path: string | null;
-  post_content: string;
-  status: "Pending" | "Approved" | "Rejected";
-  img_url: string[];
-  date_updated: string;
-  tags: string[];
-}
 
-interface ApiResponse {
-  is_success: boolean;
-  status_code: number;
-  message: string;
-  data: PostDetail;
-  timestamp: number;
-}
+
 
 const PostDetail: React.FC = () => {
-  const { id: post_id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-
   const accessToken = localStorage.getItem("accessToken") || "your-token-here";
+  const { post_id } = useParams<{ post_id: string }>();
 
-  const { data, loading, error, refetch } = useFetch<ApiResponse>(
-    `http://localhost:3000/api/v1/posts/admin/dashboard/${post_id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
 
-  const post = data?.data;
+  const { data, isLoading, isError, refetch } = usePostDetail(post_id!);
 
-  const [status, setStatus] = useState(post?.status || "Pending");
-  const [isUpdating, setIsUpdating] = useState(false); 
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); 
+  const postDetail = data?.data
+  console.log("POST ID:", post_id);
+  console.log("usePostDetail DATA:", data);
 
-  useEffect(() => {
-    if (post?.status) {
-      setStatus(post.status);
-    }
-  }, [post]);
+
+
+
+  const [status, setStatus] = useState("Pending");
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+
+
+
 
   const updateStatus = async (status: "Approved" | "Rejected") => {
     // Kiểm tra dữ liệu trước khi gửi request
@@ -62,15 +39,15 @@ const PostDetail: React.FC = () => {
       return;
     }
 
-    setIsUpdating(true); 
-    setErrorMessage(null); 
+    setIsUpdating(true);
+    setErrorMessage(null);
 
     try {
       console.log(" da vao");
-      
+
       await axios.patch(
         `http://localhost:3000/api/v1/posts/admin/dashboard/${post_id}`,
-        { status: status }, 
+        { status: status },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -79,9 +56,9 @@ const PostDetail: React.FC = () => {
       );
       console.log("da truyen vao body")
       setStatus(status);
-      refetch(); 
-     console.log("sau khi refresh thanh cong");
-     
+      refetch();
+      console.log("sau khi refresh thanh cong");
+
 
     } catch (err: any) {
       const errorMsg =
@@ -93,7 +70,7 @@ const PostDetail: React.FC = () => {
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={styles.layoutContainer}>
         <SidebarMenu />
@@ -108,14 +85,14 @@ const PostDetail: React.FC = () => {
     );
   }
 
-  if (error || !post) {
+  if (isError || !postDetail) {
     return (
       <div className={styles.layoutContainer}>
         <SidebarMenu />
         <div className={styles.contentContainer}>
           <div className={styles.postDetailWrapper}>
             <div className={styles.postDetailContainer}>
-              <h2>{error ? `Error: ${error}` : "Post Not Found"}</h2>
+              <h2>{isError ? `Error: ${isError}` : "Post Not Found"}</h2>
             </div>
           </div>
         </div>
@@ -128,30 +105,30 @@ const PostDetail: React.FC = () => {
       <div className={styles.layoutContainer}>
         <SidebarMenu />
       </div>
-      <div className={styles.contentContainer}>
+      {postDetail && <div className={styles.contentContainer}>
         <div className={styles.postDetailWrapper}>
           <div className={styles.postDetailContainer}>
             <div className={styles.userInfo}>
               <img
-                src={post.ava_img_path || "https://i.pravatar.cc/100"}
+                src={postDetail?.ava_img_path || "https://i.pravatar.cc/100"}
                 alt="User Avatar"
                 className={styles.avatar}
               />
               <div>
-                <strong>{post.user_name}</strong>
+                <strong>{postDetail.user_name}</strong>
                 <p className={styles.timestamp}>
-                  {new Date(post.date_updated).toLocaleDateString()}
+                  {new Date(postDetail.date_updated).toLocaleDateString()}
                 </p>
               </div>
             </div>
-            <h2 className={styles.postTitle}>{post.post_title}</h2>
+            <h2 className={styles.postTitle}>{postDetail.post_title}</h2>
             <div className={styles.postContent}>
-              <ImageSlider images={post.img_url} />
-              <p>{post.post_content}</p>
-              {post.tags && post.tags.length > 0 && (
+              <ImageSlider images={postDetail.img_url} />
+              <p>{postDetail.post_content}</p>
+              {postDetail.tags && postDetail.tags.length > 0 && (
                 <div>
                   <strong>Tags: </strong>
-                  {post.tags.join(", ")}
+                  {postDetail.tags.join(", ")}
                 </div>
               )}
             </div>
@@ -168,14 +145,14 @@ const PostDetail: React.FC = () => {
               <div className={styles.actionButtons}>
                 <button
                   className={styles.approved}
-                  onClick={async() =>await updateStatus("Approved")}
+                  onClick={async () => await updateStatus("Approved")}
                   disabled={isUpdating}
                 >
                   {isUpdating ? "Updating..." : "Approved"}
                 </button>
                 <button
                   className={styles.banned}
-                  onClick={async() =>await updateStatus("Rejected")}
+                  onClick={async () => await updateStatus("Rejected")}
                   disabled={isUpdating}
                 >
                   {isUpdating ? "Updating..." : "Rejected"}
@@ -184,7 +161,8 @@ const PostDetail: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
+
     </>
   );
 };
