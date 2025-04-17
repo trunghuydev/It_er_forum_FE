@@ -11,7 +11,7 @@ import Logout from './Pages/Login/Logout';
 import Statistic from './Pages/Dashboard/Statistic/Statistic';
 import PostDetail from './Pages/Dashboard/Post/Detail/PostDetail';
 import Post from './Pages/Dashboard/Post/Post';
-import ReportDetail from './Pages/Dashboard/ReportedPost/ReportedDetail';
+import ReportDetail from './Pages/Dashboard/ReportedPost/Details/ReportedDetail';
 import UserDetail from './Pages/Dashboard/User/UserDetail';
 import RpUserList from './Pages/Dashboard/ReportUser/ReportUser';
 import ReportUserDetail from './Pages/Dashboard/ReportUser/ReportUserDetail';

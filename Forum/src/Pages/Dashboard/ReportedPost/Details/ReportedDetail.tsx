@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./ReportedDetail.module.css";
-import SidebarMenu from "../../../components/SideBar/SideBarMenu";
-import { useFetch } from "../../../hooks/useFetch";
+import SidebarMenu from "@/components/SideBar/SideBarMenu";
+import { useFetch } from "@/hooks/useFetch";
 import axios from "axios";
-import ImageSlider from "../../../components/ImageSlide/ImageSlide";
+import ImageSlider from "@/components/ImageSlide/ImageSlide";
 
 // Interface cho nội dung bài viết bị báo cáo
 interface ReportContent {
@@ -62,13 +62,13 @@ const ReportDetail: React.FC = () => {
   const handleAction = async (newStatus: "Skipped" | "Restricted" | "Banned") => {
     const accessToken = localStorage.getItem("accessToken") || "your-token-here";
     try {
-      
+
       switch (newStatus) {
         case "Skipped":
           await axios.delete(
             `http://localhost:3000/api/v1/report/skip-report/${report_id}`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
-          );  setStatus(newStatus);
+          ); setStatus(newStatus);
           setTimeout(() => navigate("/reportedpost"), 5);
 
           break;
@@ -90,19 +90,19 @@ const ReportDetail: React.FC = () => {
 
         default:
           break;
-          case  "Banned":
-            console.log(report);
+        case "Banned":
+          console.log(report);
 
-            await axios.patch(
-              `http://localhost:3000/api/v1/users/admin/${report?.reported_user_id}`,
-              { status: newStatus },
-              { headers: { Authorization: `Bearer ${accessToken}` } }
-            );
-            setStatus(newStatus);
-            setTimeout(() => navigate("/reportedpost"), 5);
-  
-          
-            break;
+          await axios.patch(
+            `http://localhost:3000/api/v1/users/admin/${report?.reported_user_id}`,
+            { status: newStatus },
+            { headers: { Authorization: `Bearer ${accessToken}` } }
+          );
+          setStatus(newStatus);
+          setTimeout(() => navigate("/reportedpost"), 5);
+
+
+          break;
       }
     } catch (err) {
       console.error("Failed to update status:", err);
