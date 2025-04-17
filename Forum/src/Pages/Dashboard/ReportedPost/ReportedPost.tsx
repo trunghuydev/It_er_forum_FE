@@ -1,55 +1,19 @@
 import React, { useState } from "react";
 import styles from "./ReportedPost.module.css";
 import SidebarMenu from "../../../components/SideBar/SideBarMenu";
-import ReportedDisplay from "../../../components/ReportedPost/ReportedDisplay";
 import Header from "../../../components/Header/Header";
 import { useFetch } from "../../../hooks/useFetch";
+import { useReprotPost } from "@/hooks/ReportPost/useReportPost";
+import { TReportPostResponse } from "@/constants";
 
-// Interface cho báo cáo
-interface Report {
-  report_id: string;
-  reported_user_id: string;
-  reported_user_name: string;
-  report_title: string;
-  ava_img_path: string | null;
-}
-
-interface ApiResponse {
-  is_success: boolean;
-  status_code: number;
-  message: string;
-  data: Report[];
-  timestamp: number;
-}
 
 const ReportedPost: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("")
+  const { data, isLoading, isError } = useReprotPost();
+  const reports: TReportPostResponse[] = data?.data || [];
 
-  // Giả định accessToken được lưu trong localStorage
-  const accessToken = localStorage.getItem("accessToken") || "your-token-here";
 
-  // Fetch danh sách báo cáo từ API
-  const { data, loading, error, refetch } = useFetch<ApiResponse>(
-    "http://localhost:3000/api/v1/report/admin/Post",
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
 
-  // Lấy danh sách báo cáo từ dữ liệu API, mặc định là mảng rỗng nếu chưa có dữ liệu
-  const reports = data?.data || [];
-
-  // Lọc báo cáo dựa trên searchTerm, kiểm tra an toàn trước khi gọi toLowerCase
-  const filteredReports = reports.filter((report) => {
-    const userName = report.reported_user_name || "";
-    const reportTitle = report.report_title || "";
-    return (
-      userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      reportTitle.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
 
   return (
     <div className={styles.mainContainer}>
@@ -60,9 +24,48 @@ const ReportedPost: React.FC = () => {
           setSearchTerm={setSearchTerm}
           pendingCount={reports.length}
         />
-        {loading && <p>Loading reports...</p>}
-        {error && <p className={styles.error}>Error: {error}</p>}
-        {!loading && !error && <ReportedDisplay reports={filteredReports} />}
+        {isLoading && <p>Loading reports...</p>}
+        {isError && <p className={styles.error}>Error: {isError}</p>}
+        <div className={styles.reportedDisplayContainer}>
+          <table className={styles.reportedTable}>
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Avatar</th>
+                <th>Report Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reports.length > 0 ? (
+                reports.map((report) => (
+                  <tr
+                    key={report.report_id}
+                    onClick={() => navigate(`/report/${report.report_id}`)} // Điều hướng đến ReportDetail
+                    style={{ cursor: "pointer" }}
+                  >
+                    <td>{report.reported_user_id}</td>
+                    <td>{report.reported_user_name || "Unknown"}</td>
+                    <td>
+                      <img
+                        src={report.ava_img_path || "https://i.pravatar.cc/100"}
+                        alt="Avatar"
+                        className={styles.avatar}
+                      />
+                    </td>
+                    <td>{report.report_title || "N/A"}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={4} className={styles.noReports}>
+                    No reported posts
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

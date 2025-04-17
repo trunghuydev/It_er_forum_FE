@@ -5,14 +5,14 @@ import Header from "../../../components/Header/Header";
 import { usePost } from "../../../hooks/Post/usePost";
 import { useNavigate } from "react-router-dom";
 import { FaCheck, FaTimes } from "react-icons/fa";
-import { TDocsPost } from "@/constants";
+import { TPostResponse } from "@/constants";
 
 const Post: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [pendingCount, setPendingCount] = useState(0);
   const navigate = useNavigate();
   const { data, isLoading, isError } = usePost();
-  const posts: TDocsPost[] = data?.data || [];
+  const posts: TPostResponse[] = data?.data || [];
   const filteredPosts = posts.filter(
     (data) =>
       data.post_title.toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -1,4 +1,4 @@
-export type TDocsPost = {
+export type TPostResponse = {
     user_id: string;
     user_name: string;
     is_image: boolean;
@@ -10,8 +10,7 @@ export type TDocsPost = {
 
 }
 
-
-export type TDocsPostDetail = {
+export type TPostDetailResponse = {
     post_id: string;
     post_title: string;
     user_name: string;
@@ -22,4 +21,13 @@ export type TDocsPostDetail = {
     img_url: string[];
     date_updated: string;
     tags: string[];
+}
+
+export type TReportPostResponse = {
+    report_id: string;
+    reported_user_id: string;
+    reported_user_name: string;
+    report_title: string;
+    ava_img_path: string | null;
+
 }
