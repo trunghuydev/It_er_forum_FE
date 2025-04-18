@@ -1,6 +1,6 @@
 import { DocApi } from "@/api/docApi";
 import { TReportPostResponse } from "@/constants";
-import { TPost } from "@/interface/TPost";
+import { TPost } from "@/interface/TApiDoc";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { QueryKeys } from "@/constants";
 

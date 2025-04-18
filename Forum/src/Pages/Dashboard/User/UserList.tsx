@@ -56,7 +56,7 @@ const UserList: React.FC = () => {
       console.log("Total users count:", totalUsers); // In số lượng để kiểm tra
       setTotalUsersCount(totalUsers);
     } else {
-      setTotalUsersCount(0); 
+      setTotalUsersCount(0);
     }
   }, [users]);
 

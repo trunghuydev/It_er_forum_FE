@@ -11,7 +11,7 @@ export function usePostFetch<T>(url: string, options?: AxiosRequestConfig) {
       if (!url) return null;
 
       const source = axios.CancelToken.source();
-      const accessToken = localStorage.getItem("accessToken"); 
+      const accessToken = localStorage.getItem("accessToken");
 
       setLoading(true);
       try {
@@ -19,8 +19,8 @@ export function usePostFetch<T>(url: string, options?: AxiosRequestConfig) {
           ...options,
           headers: {
             "Content-Type": "application/json",
-            Authorization: accessToken ? `Bearer ${accessToken}` : undefined, 
-            ...options?.headers, 
+            Authorization: accessToken ? `Bearer ${accessToken}` : undefined,
+            ...options?.headers,
           },
           cancelToken: source.token,
         });

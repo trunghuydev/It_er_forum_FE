@@ -146,7 +146,7 @@ const ReportUserDetail: React.FC = () => {
               </div>
             </div>
             <div className={styles.statusActions}>
-             
+
               <div className={styles.actionButtons}>
                 <button className={styles.skip} onClick={() => handleAction("Skipped")}>
                   Skip

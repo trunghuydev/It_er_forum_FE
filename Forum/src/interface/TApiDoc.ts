@@ -1,4 +1,4 @@
-export type TPost<T> = {
+export type TApiDoc<T> = {
     is_success: boolean;
     status_code: number;
     message: string;

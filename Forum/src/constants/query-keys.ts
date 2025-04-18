@@ -1,4 +1,5 @@
 export const QueryKeys = {
+    LOGIN: 'LOGIN',
     COMMENT: 'COMMENT',
     COMMENT_DETAIL: 'COMMENT_DETAIL',
     POST: 'POST',

@@ -1,11 +1,11 @@
 import { DocApi } from '@/api/docApi';
 import { TPostResponse } from '@/constants/TDocsPost';
-import { TPost } from '@/interface/TPost';
+import { TApiDoc } from '@/interface/TApiDoc';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { QueryKeys } from '@/constants';
 
 
-type UsePostOptions = Omit<UseQueryOptions<TPost<TPostResponse[]>>, 'queryKey' | 'queryFn'>;
+type UsePostOptions = Omit<UseQueryOptions<TApiDoc<TPostResponse[]>>, 'queryKey' | 'queryFn'>;
 
 
 

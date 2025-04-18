@@ -141,8 +141,8 @@ const UserDetail: React.FC = () => {
               {isUpdating
                 ? "Updating..."
                 : user.status === "Active"
-                ? "Deactivate Account"
-                : "Activate Account"}
+                  ? "Deactivate Account"
+                  : "Activate Account"}
             </button>
           </div>
         </div>
