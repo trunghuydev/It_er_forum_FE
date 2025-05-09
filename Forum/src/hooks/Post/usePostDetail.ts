@@ -10,10 +10,10 @@ type UsePostOptions = Omit<UseQueryOptions<TPost<TPostDetailResponse>>, 'queryKe
 
 
 export const usePostDetail = (post_id: string, options?: UsePostOptions) => {
-    return useQuery<TPost<TPostDetailResponse>>({
+    return useQuery({
         ...options,
         queryKey: [QueryKeys.POST_DETAIL, post_id],
-        queryFn: () => DocApi.getAllPostDetail(post_id),
+        queryFn: () => DocApi.getPostDetail(post_id),
         enabled: !!post_id
     });
 };

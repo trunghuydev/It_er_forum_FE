@@ -1,4 +1,3 @@
-
 interface CommentContent {
     comment_id: string;
     comment_content: string;
@@ -24,5 +23,5 @@ export type TCommentDetailResponse = {
     subject: string;
     date_reported: string;
     content: CommentContent;
-    status?: string;
+    status: string;
   }

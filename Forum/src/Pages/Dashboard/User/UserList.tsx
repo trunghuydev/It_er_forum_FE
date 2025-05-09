@@ -5,55 +5,23 @@ import SidebarMenu from "../../../components/SideBar/SideBarMenu";
 import { useFetch } from "../../../hooks/useFetch";
 import avatar from "../../../Image/avata.png";
 import Header from "../../../components/Header/Header";
+import { UseUser } from "@/hooks/User/useUser";
+import { TUser } from "@/interface/TUser";
 
-// Định nghĩa interface cho User
-interface User {
-  user_id: string;
-  user_name: string;
-  age: number | null;
-  ava_img_path: string | null;
-  phone_num: string | null;
-  email: string;
-  first_name: string | null;
-  last_name: string | null;
-  status: string;
-}
 
-interface ApiResponse {
-  is_success: boolean;
-  status_code: number;
-  message: string;
-  data: User[];
-  timestamp: number;
-}
 
 const UserList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [totalUsersCount, setTotalUsersCount] = useState(0);
   const navigate = useNavigate();
+  const {data, isLoading,isError} =UseUser();
+  const users:TUser[] = data?.data || [];
 
-  // Giả định accessToken được lưu trong localStorage
-  const accessToken = localStorage.getItem("accessToken") || "your-token-here";
-
-  // Sử dụng useFetch để lấy danh sách người dùng từ API
-  const { data, error, loading, refetch } = useFetch<ApiResponse>(
-    "http://localhost:3000/api/v1/users",
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
-
-  // Lấy danh sách users từ dữ liệu API, mặc định là mảng rỗng nếu chưa có dữ liệu
-  const users = data?.data || [];
-
-  // Đồng bộ totalUsersCount với tổng số lượng người dùng
   useEffect(() => {
-    console.log("Users data:", users); // In dữ liệu users để kiểm tra
+    console.log("Users data:", users); 
     if (users) {
-      const totalUsers = users.length; // Đếm tổng số người dùng
-      console.log("Total users count:", totalUsers); // In số lượng để kiểm tra
+      const totalUsers = users.length; 
+      console.log("Total users count:", totalUsers); 
       setTotalUsersCount(totalUsers);
     } else {
       setTotalUsersCount(0);
@@ -76,10 +44,10 @@ const UserList: React.FC = () => {
           totalUsersCount={totalUsersCount}
         />
         <div className={styles.reportedDisplayContainer}>
-          {loading && <p>Loading data...</p>}
-          {error && <p className={styles.error}>Error: {error}</p>}
+          {isLoading && <p>Loading data...</p>}
+          {isError && <p className={styles.isError}>Error: {isError}</p>}
 
-          {!loading && !error && (
+          {!isLoading && !isError && (
             <table className={styles.reportedTable}>
               <thead>
                 <tr>

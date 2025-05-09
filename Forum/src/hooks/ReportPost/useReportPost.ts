@@ -1,12 +1,12 @@
 import { DocApi } from "@/api/docApi";
 import { TReportPostResponse } from "@/constants";
-import { TPost } from "@/interface/TApiDoc";
+import { TApiDoc } from "@/interface/TApiDoc";
 import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { QueryKeys } from "@/constants";
 
 
 
-type UseReprotPostOptions = Omit<UseQueryOptions<TPost<TReportPostResponse[]>>, `queryKey` | `queryFn`>;
+type UseReprotPostOptions = Omit<UseQueryOptions<TApiDoc<TReportPostResponse[]>>, `queryKey` | `queryFn`>;
 
 
 export const useReprotPost = (options?: UseReprotPostOptions) => {

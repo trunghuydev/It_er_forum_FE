@@ -2,7 +2,8 @@ import axiosClient from './AxiosClient';
 import { TApiDoc } from '@/interface/TApiDoc';
 import { TPostResponse, TPostDetailResponse, TReportPostResponse } from '@/constants/TDocsPost';
 import { Login, LoginResponse, LoginResponseTokenData } from '@/interface/Auth';
-import { TCommentResponse } from '@/constants/TComment';
+import { TCommentDetailResponse, TCommentResponse } from '@/constants/TComment';
+import { TUser } from '@/interface/TUser';
 
 export const DocApi = {
 
@@ -17,7 +18,7 @@ export const DocApi = {
         const res = await axiosClient.get(url)
         return res.data
     },
-    getAllPostDetail: async (post_id: string): Promise<TApiDoc<TPostDetailResponse>> => {
+    getPostDetail: async (post_id: string): Promise<TApiDoc<TPostDetailResponse>> => {
         const url = `/posts/admin/dashboard/${post_id}`
         const res = await axiosClient.get(url)
         return res.data
@@ -29,7 +30,7 @@ export const DocApi = {
         const res = await axiosClient.get(url)
         return res.data
     },
-    getAllReportPostDetail: async (report_id: string): Promise<TApiDoc<TReportPostResponse>> => {
+    getReportPostDetail: async (report_id: string): Promise<TApiDoc<TReportPostResponse>> => {
         const url = `/report/admin/detail/Post/${report_id}`
         const res = await axiosClient.get(url)
         return res.data
@@ -40,13 +41,19 @@ export const DocApi = {
         const res = await axiosClient.get(url)
         return res.data
     },
-    getAllcommentDetail : async (report_id: string): Promise<TApiDoc<TCommentResponse>>=>{
+    getCommentDetail : async (report_id: string): Promise<TApiDoc<TCommentDetailResponse>>=>{
         const url = `/report/admin/detail/Comment/${report_id}`
         const res = await axiosClient.get(url)
         return res.data
+    },
+    //  updateStatus: async():Promise<TApiDoc<>>=>{}
+
+    /*--------------------------------------User-------------------------------------------------------------- */
+
+    getAllUser: async ():Promise<TApiDoc<TUser[]>> => {
+        const url = `/users`
+        const res = await axiosClient.get(url)
+        return res.data
     }
-
-
-
 };
 

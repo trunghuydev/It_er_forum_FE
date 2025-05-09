@@ -15,11 +15,6 @@ const Comment: React.FC = () => {
   const { data, isLoading, isError } = useComment();
   const comment :TCommentResponse[]=data?.data||[];
 
- 
-
-
-
-
   const filteredReports = comment.filter((report) => {
     const userName = report.reported_user_name || "";
     const commentContent = report.comment_content || "";
